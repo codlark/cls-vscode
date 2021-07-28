@@ -1,0 +1,25 @@
+{
+    "name": "brikwork-vscode",
+    "displayName": "brikWork-vscode",
+    "description": "Provide syntax hightlighting for brikWork layout files in Visual Studio Code",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.58.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "brikwork",
+            "aliases": ["brikWork", "brikwork"],
+            "extensions": [".bwl"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "brikwork",
+            "scopeName": "source.brikWork",
+            "path": "./syntaxes/brikwork.tmLanguage.json"
+        }]
+    }
+}
