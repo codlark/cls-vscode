@@ -1,0 +1,179 @@
+$schema: https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json
+comment: types, toggles, fixed values like center, numbers?
+name: brikWork
+scopeName: source.brikWork
+patterns:
+- include: '#propOnly'
+- include: '#userBriks'
+- include: '#data'
+- include: '#section'
+
+repository:
+  
+  propOnly:
+    begin: \s*(layout|defaults)\s*(\{)
+    beginCaptures:
+      '1':
+        name: entity.name.section.brikwork
+      '2':
+        name: punctuation.section.begin.brikwork
+    end: (?<!\\)(\})
+    endCaptures:
+      '1':
+        name: punctuation.section.end.brikwork
+    patterns:
+    - include: '#property'
+    - include: '#badEscape'
+
+  userBriks:
+    begin: \s*(briks)\s*(\{)
+    beginCaptures:
+      '1':
+        name: entity.name.section.brikwork
+      '2':
+        name: punctuation.section.begin.brikwork
+    end: (?<!\\)(\})
+    endCaptures:
+      '1':
+        name: punctuation.section.end.brikwork
+    patterns:
+    - include: '#brikDef'
+    - include: '#badEscape'
+  
+  data:
+    begin: \s*(data)\s*(\{)
+    beginCaptures:
+      '1':
+        name: entity.name.section.brikwork
+      '2':
+        name: punctuation.section.begin.brikwork
+    end: (?<!\\)(\})
+    endCaptures:
+      '1':
+        name: punctuation.section.end.brikwork
+    patterns:
+    - include: '#escape'
+    - match: ','
+      name: punctuation.definition.data.brikwork
+    - include: '#brik'
+
+  section:
+    begin: \s*(\S+)\s*(\{)
+    beginCaptures:
+      '1':
+        name: variable.name.brikwork
+      '2':
+        name: punctuation.section.begin.brikwork
+    end: (?<!\\)(\})
+    endCaptures:
+      '1':
+        name: punctuation.section.end.brikwork
+    patterns:
+    - include: '#section'
+    - include: '#property'
+    - include: '#badEscape'
+
+  brikDef:
+    begin: \s*([^=]+\s*)(=)
+    beginCaptures:
+      '1':
+        name: variable.other.brikwork
+      '2':
+        name: punctuation.assignment.brikwork
+    end: (;)|\n|(?=\})
+    endCaptures:
+      '1':
+        name: punctuation.terminator.brikwork
+    patterns:
+    - include: '#escape'
+    - include: '#brik'
+
+  property:
+    begin: >
+      (?x)
+      \s*
+      (width|height|name|output|data|template|
+      type|x|y|rotation|draw|
+      text|fontFamily|fontSize|color|wordWrap|alignment|italic|bold|overline|underline|lineThrough|
+      source|keepAspectRatio|
+      lineColor|lineWidth|lineJoin|lineCap|fillColor)\s*(:)|
+      ([^:]+)\s*(:)
+    beginCaptures:
+      '1':
+        name: support.type.property-name.brikwork
+      '2':
+        name: punctuation.seperator.key-value.brikwork
+      '3':
+        name: invalid.error.brikwork
+      '4':
+        name: punctuation.seperator.key-value.brikwork
+    end: (;)|\n|(?=\})
+    endCaptures:
+      '1':
+        name: punctuation.terminator.brikwork
+    patterns:
+    - include: '#escape'
+    - include: '#brik'
+  
+  brik:
+    patterns:
+    - include: '#brikBlank'
+    - include: '#brikStd'
+    - include: '#brikOther'
+
+  brikBlank:
+    match: \[\s*\]
+    name: support.function.brikwork
+
+  brikStd:
+    begin: >
+      (?x)
+      (\[)\s*
+      (rowIndex|rowTotal|assetIndex|assetTotal|repeatIndex|repeatTotal|
+      b|i|u|s|
+      capitalize|lower|upper|
+      dup|file|substring|
+      in|eq|ne
+      )(?=[]|\s])
+    beginCaptures:
+      '1':
+        name: punctuation.definition.string.begin.brikwork
+      '2':
+        name: support.function.brikwork
+    end: (?<!\\)\]
+    endCaptures:
+      '0':
+        name: punctuation.definition.string.end.brikwork
+    name: string.interpolated.brikwork
+    patterns:
+    - include: '#escape'
+    - match: \|
+      name: punctuation.definition.string.continue.brikwork
+    - include: '#brik'
+
+
+  brikOther:
+    begin: (\[)\s*([^]|]*?)(?=[]|\s])
+    beginCaptures:
+      '1':
+        name: punctuation.definition.string.begin.brikwork
+      '2':
+        name: variable.name.brikwork
+    end: (?<!\\)\]
+    endCaptures:
+      '0':
+        name: punctuation.definition.string.end.brikwork
+    name: string.interpolated.brikwork
+    patterns:
+    - include: '#escape'
+    - match: \|
+      name: punctuation.definition.string.continue.brikwork
+    - include: '#brik'
+  
+  escape:
+    match: \\\S
+    name: constant.character.escape.brikwork
+
+  badEscape:
+    match: \\\S
+    name: invalid.brikwork

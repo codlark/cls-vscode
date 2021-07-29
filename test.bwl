@@ -1,0 +1,22 @@
+layout {
+    width: 1in;
+    height: 1in
+}
+
+defaults {}
+
+briks {
+    foo = y
+}
+
+foo {
+    alignment: center top
+    text: [] [i| ohno] [color]
+    badProp: yup;
+    bar {x:yd}
+}
+
+data {
+color, name
+yellow, bird
+}
