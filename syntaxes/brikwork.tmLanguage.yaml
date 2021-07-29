@@ -96,7 +96,9 @@ repository:
       type|x|y|rotation|draw|
       text|fontFamily|fontSize|color|wordWrap|alignment|italic|bold|overline|underline|lineThrough|
       source|keepAspectRatio|
-      lineColor|lineWidth|lineJoin|lineCap|fillColor)\s*(:)|
+      lineColor|lineWidth|lineJoin|lineCap|fillColor|
+      xRadius|yRadius|
+      x2|y2)\s*(:)|
       ([^:]+)\s*(:)
     beginCaptures:
       '1':
