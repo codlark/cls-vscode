@@ -340,7 +340,6 @@
                     "name": "punctuation.definition.string.end.brikwork"
                 }
             },
-            "name": "string.interpolated.brikwork",
             "patterns": [
                 {
                     "include": "#testOps"
@@ -368,7 +367,7 @@
                     "name": "punctuation.definition.string.begin.brikwork"
                 },
                 "2": {
-                    "name": "control.keyword.brikwork"
+                    "name": "keyword.control.brikwork"
                 }
             },
             "end": "(?<!\\\\)\\]",
@@ -377,7 +376,6 @@
                     "name": "punctuation.definition.string.end.brikwork"
                 }
             },
-            "name": "string.interpolated.brikwork",
             "patterns": [
                 {
                     "include": "#testOps"
@@ -414,7 +412,6 @@
                     "name": "punctuation.definition.string.end.brikwork"
                 }
             },
-            "name": "string.interpolated.brikwork",
             "patterns": [
                 {
                     "match": "\\+|-|\\*|/|%",
@@ -448,7 +445,6 @@
                     "name": "punctuation.definition.string.end.brikwork"
                 }
             },
-            "name": "string.interpolated.brikwork",
             "patterns": [
                 {
                     "match": "\\\\\\S",
@@ -486,7 +482,6 @@
                     "name": "punctuation.definition.string.end.brikwork"
                 }
             },
-            "name": "string.interpolated.brikwork",
             "patterns": [
                 {
                     "include": "#escape"
@@ -516,7 +511,6 @@
                     "name": "punctuation.definition.string.end.brikwork"
                 }
             },
-            "name": "string.interpolated.brikwork",
             "patterns": [
                 {
                     "include": "#escape"

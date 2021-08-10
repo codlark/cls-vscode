@@ -237,7 +237,6 @@ repository:
     endCaptures:
       '0':
         name: punctuation.definition.string.end.brikwork
-    name: string.interpolated.brikwork
     patterns:
     - include: '#testOps'
     - include: '#escape'
@@ -253,12 +252,11 @@ repository:
       '1':
         name: punctuation.definition.string.begin.brikwork
       '2':
-        name: control.keyword.brikwork
+        name: keyword.control.brikwork
     end: (?<!\\)\]
     endCaptures:
       '0':
         name: punctuation.definition.string.end.brikwork
-    name: string.interpolated.brikwork
     patterns:
     - include: '#testOps'
     - include: '#escape'
@@ -281,7 +279,6 @@ repository:
     endCaptures:
       '0':
         name: punctuation.definition.string.end.brikwork
-    name: string.interpolated.brikwork
     patterns:
     - match: \+|-|\*|/|%
       name: keyword.operator.brikwork
@@ -301,7 +298,6 @@ repository:
     endCaptures:
       '0':
         name: punctuation.definition.string.end.brikwork
-    name: string.interpolated.brikwork
     patterns:
     - match: \\\S
       name: constant.character.placeholder.brikwork
@@ -333,7 +329,6 @@ repository:
     endCaptures:
       '0':
         name: punctuation.definition.string.end.brikwork
-    name: string.interpolated.brikwork
     patterns:
     - include: '#escape'
     - match: \|
@@ -352,7 +347,6 @@ repository:
     endCaptures:
       '0':
         name: punctuation.definition.string.end.brikwork
-    name: string.interpolated.brikwork
     patterns:
     - include: '#escape'
     - match: \|

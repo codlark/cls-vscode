@@ -1,8 +1,9 @@
 {
     "name": "brikwork-vscode",
-    "displayName": "brikWork-vscode",
-    "description": "Provide syntax hightlighting for brikWork layout files in Visual Studio Code",
-    "version": "0.0.1",
+    "displayName": "brikWork Extension for VSCode",
+    "description": "Language package for brikWork layout files in Visual Studio Code",
+    "version": "0.1.0",
+    "publisher": "codlark",
     "engines": {
         "vscode": "^1.58.0"
     },
@@ -12,7 +13,7 @@
     "contributes": {
         "languages": [{
             "id": "brikwork",
-            "aliases": ["brikWork", "brikwork"],
+            "aliases": ["brikWork Layout File", "brikWork", "brikwork"],
             "extensions": [".bwl"],
             "configuration": "./language-configuration.json"
         }],
@@ -20,6 +21,27 @@
             "language": "brikwork",
             "scopeName": "source.brikWork",
             "path": "./syntaxes/brikwork.tmLanguage.json"
-        }]
-    }
+        }],
+        "commands":[{
+            "title": "open brikWork with current file",
+            "shortTitle": "open current file",
+            "when": "editorLangID == brikwork",
+            "command": "brikWork.openCurrent"
+        }],
+        "configuration":[
+            {
+                "title": "brikWork",
+                "properties": {
+                    "appPath": {
+                        "type": "string",
+                        "default": "%USERPROFILE%\\Documents\\brikWork\\brikWork app\\brikWork.exe",
+                        "description": "Path the to brikWork app. Use command \"Select brikWork App\" for best results"
+                    }
+                }
+            }
+        ]
+    }, "main": "./src/commands.cjs",
+    "activationEvents": [
+        "onCommand:brikWork.openCurrent"
+    ]
 }
