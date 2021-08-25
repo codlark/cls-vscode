@@ -17,5 +17,11 @@
     "surroundingPairs": [
         ["{", "}"],
         ["[", "]"],
-    ]
+    ],
+    "folding": {
+        "markers": {
+            "start": "^\\s*\\w+\\s*\\{$",
+            "end": "^\\s*\\}$"
+        }
+    }
 }

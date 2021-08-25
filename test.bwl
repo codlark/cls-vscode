@@ -1,5 +1,5 @@
 layout {
-    width: 1in;
+    width: 1in
     height: 1in
 }
 
@@ -8,20 +8,23 @@ defaults {
 }
 
 briks {
-    foo = y
+    foo = 45in
 }
+
+#test
 
 foo {
     type: label;
     alignment: center top
     color: blue;
     color: #ffffff
-    width: true
-    text: [] [i| ohno] [color]
+    width: +45
+    text: yes
+    text: [] [i| ohno yes center  ] [color]
     badProp: yup;
     text: [if|? 6 > 5 | yes | #ffffff]
     color: [?| 4 == asdf]
-    bar {x:[#| 1+2-3*4/5%6];y:[/|\;wow]}
+    bar {x:[=| 1 + 2 - 3 * 4 / 5 % 6];y:[/|\;wow]}
 }
 
 data {

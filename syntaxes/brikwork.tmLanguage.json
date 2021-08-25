@@ -25,7 +25,8 @@
             "name": "comment.line.number-sign.brikwork"
         },
         "propOnly": {
-            "begin": "\\s*(layout|defaults)\\s*(\\{)",
+            "begin": "\\s*(layout|defaults|pdf)\\s*(\\{)",
+            "name": "meta.section.brikwork",
             "beginCaptures": {
                 "1": {
                     "name": "variable.language.brikwork"
@@ -202,7 +203,7 @@
             ]
         },
         "propertyKnown": {
-            "begin": "(?x) \\s* (width|height|name|output|data|template| x|y|rotation|draw| text|fontFamily|fontSize|color|wordWrap|alignment|italic|bold|overline|underline|lineThrough| source|keepAspectRatio| lineColor|lineWidth|lineJoin|lineCap|fillColor| xRadius|yRadius| x2|y2)\\s*(:)\n",
+            "begin": "(?x)\\s* (width|height|name|output|data|template|dpi| name|xMargin|yMargin|border|pageSize|orientation|render| x|y|rotation|draw| text|fontFamily|fontSize|color|wordWrap|alignment|italic|bold|overline|underline|lineThrough| source|keepAspectRatio| lineColor|lineWidth|lineJoin|lineCap|fillColor| xRadius|yRadius| x2|y2)\\s*(:)\n",
             "beginCaptures": {
                 "1": {
                     "name": "entity.other.attribute-name.brikwork"
@@ -248,13 +249,7 @@
         "value": {
             "patterns": [
                 {
-                    "include": "#escape"
-                },
-                {
-                    "include": "#color"
-                },
-                {
-                    "include": "#constant"
+                    "include": "#keywordValue"
                 },
                 {
                     "include": "#number"
@@ -263,28 +258,41 @@
                     "include": "#toggle"
                 },
                 {
+                    "include": "#color"
+                },
+                {
                     "include": "#brik"
+                },
+                {
+                    "include": "#escape"
                 }
             ]
         },
+        "keywordValue": {
+            "match": "(?x)\\b (center|left|right|justify| top|middle|bottom| miter|bevel|round| flat|square|round)\\b\n",
+            "name": "support.constant.property-value.brikwork"
+        },
         "escape": {
-            "match": "\\\\\\S",
+            "match": "\\\\\\S|\\\\\\n",
             "name": "constant.character.escape.brikwork"
         },
         "badEscape": {
             "match": "\\\\\\S",
             "name": "invalid.brikwork"
         },
-        "constant": {
-            "match": "(?x) center|left|right|justify| top|middle|bottom| miter|bevel|round| flat|square|round\n",
-            "name": "support.constant.property-value.brikwork"
-        },
         "number": {
-            "match": "[-+]?[0-9]+(\\.[0-9]*)?\\s*(in)?",
-            "name": "constant.numeric.brikwork"
+            "match": "(?x) [\\-+\\^]?( \\d+| \\d+\\.\\d+| \\.\\d+| \\d+[./]\\d+/\\d+| [./]?\\d+/\\d+ )(px|in|mm|pt|deg|%)?\n",
+            "captures": {
+                "0": {
+                    "name": "constant.numeric.brikwork"
+                },
+                "2": {
+                    "name": "keyword.other.unit.brikwork"
+                }
+            }
         },
         "toggle": {
-            "match": "true|yes|on|false|no|off",
+            "match": "\\b(true|yes|on|false|no|off)\\b",
             "name": "constant.language.brikwork"
         },
         "color": {
@@ -352,7 +360,7 @@
                     "name": "punctuation.definition.string.continue.brikwork"
                 },
                 {
-                    "include": "#brik"
+                    "include": "#value"
                 },
                 {
                     "match": "\\?",
@@ -388,7 +396,7 @@
                     "name": "punctuation.definition.string.continue.brikwork"
                 },
                 {
-                    "include": "#brik"
+                    "include": "#value"
                 }
             ]
         },
@@ -397,7 +405,7 @@
             "name": "keyword.operator.brikwork"
         },
         "mathBrik": {
-            "begin": "(\\[)\\s*(#)(?=[]|\\s])",
+            "begin": "(\\[)\\s*(\\=)(?=[]|\\s])",
             "beginCaptures": {
                 "1": {
                     "name": "punctuation.definition.string.begin.brikwork"
@@ -425,7 +433,7 @@
                     "name": "punctuation.definition.string.continue.brikwork"
                 },
                 {
-                    "include": "#brik"
+                    "include": "#value"
                 }
             ]
         },
@@ -458,7 +466,7 @@
                     "name": "punctuation.definition.string.continue.brikwork"
                 },
                 {
-                    "include": "#brik"
+                    "include": "#value"
                 }
             ]
         },
@@ -467,7 +475,7 @@
             "name": "constant.language.brikwork"
         },
         "brikStd": {
-            "begin": "(?x) (\\[)\\s* (rowIndex|rowTotal|assetIndex|assetTotal|repeatIndex|repeatTotal| b|i|u|s| capitalize|lower|upper| dup|file|substring| in|eq|ne )(?=[]|\\s])\n",
+            "begin": "(?x) (\\[)\\s* (rowIndex|rowTotal|assetIndex|assetTotal|repeatIndex|repeatTotal| b|i|u|s| capitalize|lower|upper| dup|file|substr|slice| in|eq|ne )(?=[]|\\s])\n",
             "beginCaptures": {
                 "1": {
                     "name": "punctuation.definition.string.begin.brikwork"
@@ -491,7 +499,7 @@
                     "name": "punctuation.definition.string.continue.brikwork"
                 },
                 {
-                    "include": "#brik"
+                    "include": "#value"
                 }
             ]
         },
@@ -520,7 +528,7 @@
                     "name": "punctuation.definition.string.continue.brikwork"
                 },
                 {
-                    "include": "#brik"
+                    "include": "#value"
                 }
             ]
         }

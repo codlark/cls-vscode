@@ -1,24 +1,43 @@
 
 // import * as vscode from 'vscode'
 const vscode = require('vscode')
+const spawn = require('child_process').spawn
+
+function openLayout(filename) {
+    config = vscode.workspace.getConfiguration('brikWork')
+    appPath = config.get('appPath')
+    spawn(appPath, [filename])
+
+}
 
 function openCurrent(textEditor, edit) {
     doc = textEditor.document
     if (doc.isUntitled) {
-        thenable = vscode.window.showSaveDialog({"filters": {"brikWork Layout File":["bwl"]}})
-        thenable.then
+        vscode.window.showWarningMessage("Please save layout file before trying to open in brikWork")
+
+    } else if (doc.isDirty) {
+        vscode.window.showInformationMessage('Layout file is unsaved, save first?',
+        'Yes', 'No').then((res) => {
+            if (res == 'Yes') {
+                doc.save()
+                openLayout(doc.fileName)
+            }
+        })
+
     } else {
-        vscode.window.showInformationMessage(textEditor.document.fileName)
+        openLayout(doc.fileName)
     }
 }
 
 function setAppPath() {
-    path = vscode.window.showOpenDialog()
-    path.then((result)=> {
-        if (result === undefined) {
-            //don't set
-        } else {
-            vscode.workspace.getConfiguration('')
+    vscode.window.showOpenDialog().then((result) => {
+        if (result !== undefined) {
+            filename = result[0].fsPath
+            // vscode.window.showInformationMessage(''+filename)
+
+            config = vscode.workspace.getConfiguration('brikWork')
+            config.update('appPath', filename, true)
+
         }
     })
 }
@@ -27,7 +46,7 @@ function setAppPath() {
 module.exports.activate = function (context) {
 
     disposable = vscode.commands.registerCommand('brikWork.setAppPath', setAppPath)
-
+    context.subscriptions.push(disposable)
     disposable = vscode.commands.registerTextEditorCommand('brikWork.openCurrent', openCurrent)
     context.subscriptions.push(disposable)
 }

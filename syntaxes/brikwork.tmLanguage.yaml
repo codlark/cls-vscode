@@ -14,7 +14,7 @@ repository:
     name: comment.line.number-sign.brikwork
 
   propOnly:
-    begin: \s*(layout|defaults)\s*(\{)
+    begin: \s*(layout|defaults|pdf)\s*(\{)
     beginCaptures:
       '1':
         name: variable.language.brikwork
@@ -28,7 +28,7 @@ repository:
     - include: '#comments'
     - include: '#property'
     - include: '#badEscape'
-
+  
   userBriks:
     begin: \s*(briks)\s*(\{)
     beginCaptures:
@@ -119,9 +119,9 @@ repository:
 
   propertyKnown:
     begin: >
-      (?x)
-      \s*
-      (width|height|name|output|data|template|
+      (?x)\s*
+      (width|height|name|output|data|template|dpi|
+      name|xMargin|yMargin|border|pageSize|orientation|render|
       x|y|rotation|draw|
       text|fontFamily|fontSize|color|wordWrap|alignment|italic|bold|overline|underline|lineThrough|
       source|keepAspectRatio|
@@ -156,36 +156,48 @@ repository:
 
   value:
     patterns:
-    - include: '#escape'
-    - include: '#color'
-    - include: '#constant'
+    - include: '#keywordValue'
     - include: '#number'
     - include: '#toggle'
+    - include: '#color'
     - include: '#brik'
+    - include: '#escape'
+  
+  keywordValue:
+    match: >
+      (?x)\b
+      (center|left|right|justify|
+      top|middle|bottom|
+      miter|bevel|round|
+      flat|square|round)\b
+    name: support.constant.property-value.brikwork
 
   escape:
-    match: \\\S
+    match: \\\S|\\\n
     name: constant.character.escape.brikwork
 
   badEscape:
     match: \\\S
     name: invalid.brikwork
 
-  constant:
+  number:
     match: >
       (?x)
-      center|left|right|justify|
-      top|middle|bottom|
-      miter|bevel|round|
-      flat|square|round
-    name: support.constant.property-value.brikwork
-
-  number:
-    match: '[-+]?[0-9]+(\.[0-9]*)?\s*(in)?'
-    name: constant.numeric.brikwork
-  
+      [\-+\^]?(
+      \d+|
+      \d+\.\d+|
+      \.\d+|
+      \d+[./]\d+/\d+|
+      [./]?\d+/\d+
+      )(px|in|mm|pt|deg|%)?
+    captures:
+      '0':
+        name: constant.numeric.brikwork
+      '2':
+        name: keyword.other.unit.brikwork
+     
   toggle:
-    match: true|yes|on|false|no|off
+    match: \b(true|yes|on|false|no|off)\b
     name: constant.language.brikwork
 
   color:
@@ -215,7 +227,7 @@ repository:
       powderblue|purple|red|rosybrown|royalblue|saddlebrown|salmon|sandybrown|seagreen|seashell|
       sienna|silver|skyblue|slateblue|slategray|slategrey|snow|springgreen|steelblue|tan|teal|
       thistle|tomato|turquoise|violet|wheat|white|whitesmoke|yellow|yellowgreen)
-    
+
   brik:
     patterns:
     - include: '#ifBrik'
@@ -242,7 +254,7 @@ repository:
     - include: '#escape'
     - match: \|
       name: punctuation.definition.string.continue.brikwork
-    - include: '#brik'
+    - include: '#value'
     - match: '\?'
       name: keyword.operator.brikwork
 
@@ -262,14 +274,14 @@ repository:
     - include: '#escape'
     - match: \|
       name: punctuation.definition.string.continue.brikwork
-    - include: '#brik'
+    - include: '#value'
 
   testOps:
     match: ==|=!|>|>=|<|<=
     name: keyword.operator.brikwork
 
   mathBrik:
-    begin: (\[)\s*(#)(?=[]|\s])
+    begin: (\[)\s*(\=)(?=[]|\s])
     beginCaptures:
       '1':
         name: punctuation.definition.string.begin.brikwork
@@ -285,7 +297,7 @@ repository:
     - include: '#escape'
     - match: \|
       name: punctuation.definition.string.continue.brikwork
-    - include: '#brik'
+    - include: '#value'
 
   escapeBrik:
     begin: (\[)\s*(/)(?=[]|\s])
@@ -304,7 +316,7 @@ repository:
     - include: '#escape'
     - match: \|
       name: punctuation.definition.string.continue.brikwork
-    - include: '#brik'
+    - include: '#value'
 
   brikBlank:
     match: \[\s*\]
@@ -317,7 +329,7 @@ repository:
       (rowIndex|rowTotal|assetIndex|assetTotal|repeatIndex|repeatTotal|
       b|i|u|s|
       capitalize|lower|upper|
-      dup|file|substring|
+      dup|file|substr|slice|
       in|eq|ne
       )(?=[]|\s])
     beginCaptures:
@@ -333,7 +345,7 @@ repository:
     - include: '#escape'
     - match: \|
       name: punctuation.definition.string.continue.brikwork
-    - include: '#brik'
+    - include: '#value'
 
 
   brikOther:
@@ -351,4 +363,4 @@ repository:
     - include: '#escape'
     - match: \|
       name: punctuation.definition.string.continue.brikwork
-    - include: '#brik'
+    - include: '#value'

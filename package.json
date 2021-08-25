@@ -22,17 +22,29 @@
             "scopeName": "source.brikWork",
             "path": "./syntaxes/brikwork.tmLanguage.json"
         }],
+        "snippets": [
+            {
+                "language": "brikwork",
+                "path": "./src/snippets.json"
+            }
+        ],
         "commands":[{
             "title": "open brikWork with current file",
             "shortTitle": "open current file",
             "when": "editorLangID == brikwork",
             "command": "brikWork.openCurrent"
+        }, {
+            "title": "set path to brikWork app",
+            "shortTitle": "set brikWork app path",
+            "when": "editorLangID == brikwork",
+            "command": "brikWork.setAppPath"
         }],
         "configuration":[
             {
                 "title": "brikWork",
+                "id": "brikWork",
                 "properties": {
-                    "appPath": {
+                    "brikWork.appPath": {
                         "type": "string",
                         "default": "%USERPROFILE%\\Documents\\brikWork\\brikWork app\\brikWork.exe",
                         "description": "Path the to brikWork app. Use command \"Select brikWork App\" for best results"
@@ -42,6 +54,7 @@
         ]
     }, "main": "./src/commands.cjs",
     "activationEvents": [
-        "onCommand:brikWork.openCurrent"
+        "onCommand:brikWork.openCurrent",
+        "onCommand:brikWork.setAppPath"
     ]
 }
