@@ -1,15 +1,21 @@
 {
     "name": "brikwork-vscode",
-    "displayName": "brikWork Extension for VSCode",
+    "displayName": "brikWork Extension for VS Code",
     "description": "Language package for brikWork layout files in Visual Studio Code",
     "version": "0.1.0",
     "publisher": "codlark",
+    "icon": "./logo.png",
+    "homepage": "https://codlark.itch.io/brikwork",
     "engines": {
         "vscode": "^1.58.0"
     },
     "categories": [
         "Programming Languages"
     ],
+    "keywords": [
+        "board games"
+    ],
+    "main": "./src/commands.cjs",
     "contributes": {
         "languages": [{
             "id": "brikwork",
@@ -28,6 +34,15 @@
                 "path": "./src/snippets.json"
             }
         ],
+        "keybindings":[
+            {
+                "command": "brikWork.openCurrent",
+                "key": "ctrl+alt+b",
+                "mac": "cmd+alt+b",
+                "when": "editorLangId == brikwork"
+
+            }
+        ],
         "commands":[{
             "title": "open brikWork with current file",
             "shortTitle": "open current file",
@@ -36,7 +51,7 @@
         }, {
             "title": "set path to brikWork app",
             "shortTitle": "set brikWork app path",
-            "when": "editorLangID == brikwork",
+            "when": "editorLangId == brikwork",
             "command": "brikWork.setAppPath"
         }],
         "configuration":[
@@ -47,12 +62,12 @@
                     "brikWork.appPath": {
                         "type": "string",
                         "default": "%USERPROFILE%\\Documents\\brikWork\\brikWork app\\brikWork.exe",
-                        "description": "Path the to brikWork app. Use command \"Select brikWork App\" for best results"
+                        "description": "Path the to brikWork app. Use command \"set path to brikWork app\" for best results"
                     }
                 }
             }
         ]
-    }, "main": "./src/commands.cjs",
+    },
     "activationEvents": [
         "onCommand:brikWork.openCurrent",
         "onCommand:brikWork.setAppPath"

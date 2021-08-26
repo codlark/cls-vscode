@@ -5,8 +5,8 @@ patterns:
 - include: '#propOnly'
 - include: '#userBriks'
 - include: '#data'
-- include: '#section'
 - include: '#comments'
+- include: '#section'
 repository:
   
   comments:
@@ -114,8 +114,6 @@ repository:
     patterns:
     - match: \s*none|label|image|rect|circ|ellipse|line\s*
       name: storage.type.brikwork
-    # - match: .*?
-      # name: invalid.illegal.brikwork
 
   propertyKnown:
     begin: >

@@ -2,9 +2,11 @@
 
 All notable changes to the "brikwork-vscode" extension will be documented in this file.
 
-## [Unreleased]
-
-## v 0.1, for brikWork v 0.3
-
-- added: basic syntax highlighting
-- added: 'run brikWork with current file' command
+## v 0.1, for brikWork v 0.4
+### added
+- syntax highlighting
+- 'open brikWork with current file' command
+- 'set path to brikWork app' command
+- setting for brikWork path
+- snippets for layout and pdf sections
+- keyboard short cut for 'open brikwork with current file'

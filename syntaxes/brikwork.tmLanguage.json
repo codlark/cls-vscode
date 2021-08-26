@@ -13,10 +13,10 @@
             "include": "#data"
         },
         {
-            "include": "#section"
+            "include": "#comments"
         },
         {
-            "include": "#comments"
+            "include": "#section"
         }
     ],
     "repository": {
@@ -26,7 +26,6 @@
         },
         "propOnly": {
             "begin": "\\s*(layout|defaults|pdf)\\s*(\\{)",
-            "name": "meta.section.brikwork",
             "beginCaptures": {
                 "1": {
                     "name": "variable.language.brikwork"
