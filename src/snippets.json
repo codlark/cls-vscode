@@ -7,7 +7,7 @@
             "layout {",
             "\twidth: ${1:1in}",
             "\theight: ${2:1in}",
-            "\tname: ${3:${TM_FILENAME_BASE:asset}[assetIndex]}.pdf",
+            "\tname: ${3:${TM_FILENAME_BASE:asset}[assetIndex]}.png",
             "\toutput: ${4:output}",
             "\t${5:data: ${6:${TM_FILENAME_BASE:data}}.csv}",
             "\t${7:template: ${8:template}.bwl}",
