@@ -4,7 +4,7 @@
     "description": "Language package for brikWork layout files in Visual Studio Code",
     "version": "0.1.0",
     "publisher": "codlark",
-    "icon": "./logo.png",
+    "icon": "logo.png",
     "homepage": "https://codlark.itch.io/brikwork",
     "engines": {
         "vscode": "^1.58.0"

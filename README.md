@@ -1,12 +1,12 @@
 # brikWork Extension for VSCode
 
-This package provides features for brikWork layout development for VSCode
+This package provides features for brikWork layout files for VSCode. For more information abbout brikWork see the [brikWork homepage](https://codlark.itch.io/brikwork).
 
 ## Features
 
  - Syntax highlighting for layout files
- - Snippets for the `layout` section and `[if| ]` brik
- - A command to easily view the current asset in brikWork
+ - Snippets for the `layout`  and `pdf` sections
+ - A command to easily view the current layout in brikWork
 
 
 ## Extension Settings
