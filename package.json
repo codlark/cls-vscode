@@ -2,7 +2,7 @@
     "name": "brikwork-vscode",
     "displayName": "brikWork",
     "description": "Language package for brikWork layout files",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "publisher": "codlark",
     "icon": "logo.png",
     "homepage": "https://codlark.itch.io/brikwork",
