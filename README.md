@@ -1,6 +1,6 @@
-# brikWork Extension for VSCode
+# brikWork
 
-This package provides features for brikWork layout files for VSCode. For more information abbout brikWork see the [brikWork homepage](https://codlark.itch.io/brikwork).
+This package provides features for brikWork layout files for Visual Studio Code. For more information about brikWork see the [brikWork homepage](https://codlark.itch.io/brikwork).
 
 ## Features
 

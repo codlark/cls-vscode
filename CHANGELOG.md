@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the "brikwork-vscode" extension will be documented in this file.
+All notable changes to the brikWork extension will be documented in this file.
 
 ## v 0.1, for brikWork v 0.4
 ### added

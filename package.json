@@ -1,8 +1,8 @@
 {
     "name": "brikwork-vscode",
-    "displayName": "brikWork Extension for VS Code",
-    "description": "Language package for brikWork layout files in Visual Studio Code",
-    "version": "0.1.0",
+    "displayName": "brikWork",
+    "description": "Language package for brikWork layout files",
+    "version": "0.1.1",
     "publisher": "codlark",
     "icon": "logo.png",
     "homepage": "https://codlark.itch.io/brikwork",
@@ -13,7 +13,10 @@
         "Programming Languages"
     ],
     "keywords": [
-        "board games"
+        "board games",
+        "card games",
+        "board game design",
+        "card game design"
     ],
     "main": "./src/commands.cjs",
     "contributes": {
