@@ -98,7 +98,6 @@ repository:
     patterns:
     - include: '#propertyType'
     - include: '#propertyKnown'
-    - include: '#propertyBad'
 
   propertyType:
     begin: \s*(type)(:)
@@ -112,13 +111,13 @@ repository:
       '1':
         name: punctuation.terminator.brikwork
     patterns:
-    - match: \s*none|label|image|rect|circ|ellipse|line\s*
+    - match: \s*none|label|imageBox|image|rect|circ|ellipse|line\s*
       name: storage.type.brikwork
 
   propertyKnown:
     begin: >
       (?x)\s*
-      (width|height|name|output|data|template|dpi|
+      (width|height|name|output|data|template|dpi|csv|
       name|xMargin|yMargin|border|pageSize|orientation|render|
       x|y|rotation|draw|
       text|fontFamily|fontSize|color|wordWrap|alignment|italic|bold|overline|underline|lineThrough|
@@ -129,20 +128,6 @@ repository:
     beginCaptures:
       '1':
         name: entity.other.attribute-name.brikwork
-      '2':
-        name: punctuation.seperator.key-value.brikwork
-    end: (;)|\n|(?=\})
-    endCaptures:
-      '1':
-        name: punctuation.terminator.brikwork
-    patterns:
-    - include: '#value'
-  
-  propertyBad:
-    begin: ([^:]+)\s*(:)
-    beginCaptures:
-      '1':
-        name: invalid.illegal.brikwork
       '2':
         name: punctuation.seperator.key-value.brikwork
     end: (;)|\n|(?=\})
@@ -182,11 +167,11 @@ repository:
     match: >
       (?x)
       [\-+\^]?(
+      \d+[./]\d+/\d+|
+      [./]?\d+/\d+|
       \d+|
       \d+\.\d+|
-      \.\d+|
-      \d+[./]\d+/\d+|
-      [./]?\d+/\d+
+      \.\d+
       )(px|in|mm|pt|deg|%)?
     captures:
       '0':
@@ -328,6 +313,7 @@ repository:
       b|i|u|s|
       capitalize|lower|upper|
       dup|file|substr|slice|
+      rnd|
       in|eq|ne
       )(?=[]|\s])
     beginCaptures:

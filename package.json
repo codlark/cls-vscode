@@ -2,7 +2,7 @@
     "name": "brikwork-vscode",
     "displayName": "brikWork",
     "description": "Language package for brikWork layout files",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "publisher": "codlark",
     "icon": "logo.png",
     "homepage": "https://codlark.itch.io/brikwork",
@@ -20,44 +20,56 @@
     ],
     "main": "./src/commands.cjs",
     "contributes": {
-        "languages": [{
-            "id": "brikwork",
-            "aliases": ["brikWork Layout File", "brikWork", "brikwork"],
-            "extensions": [".bwl"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "brikwork",
-            "scopeName": "source.brikWork",
-            "path": "./syntaxes/brikwork.tmLanguage.json"
-        }],
+        "languages": [
+            {
+                "id": "brikwork",
+                "aliases": [
+                    "brikWork Layout File",
+                    "brikWork",
+                    "brikwork"
+                ],
+                "extensions": [
+                    ".bwl"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "brikwork",
+                "scopeName": "source.brikWork",
+                "path": "./syntaxes/brikwork.tmLanguage.json"
+            }
+        ],
         "snippets": [
             {
                 "language": "brikwork",
                 "path": "./src/snippets.json"
             }
         ],
-        "keybindings":[
+        "keybindings": [
             {
                 "command": "brikWork.openCurrent",
                 "key": "ctrl+alt+b",
                 "mac": "cmd+alt+b",
                 "when": "editorLangId == brikwork"
-
             }
         ],
-        "commands":[{
-            "title": "open brikWork with current file",
-            "shortTitle": "open current file",
-            "when": "editorLangID == brikwork",
-            "command": "brikWork.openCurrent"
-        }, {
-            "title": "set path to brikWork app",
-            "shortTitle": "set brikWork app path",
-            "when": "editorLangId == brikwork",
-            "command": "brikWork.setAppPath"
-        }],
-        "configuration":[
+        "commands": [
+            {
+                "title": "open brikWork with current file",
+                "shortTitle": "open current file",
+                "when": "editorLangID == brikwork",
+                "command": "brikWork.openCurrent"
+            },
+            {
+                "title": "set path to brikWork app",
+                "shortTitle": "set brikWork app path",
+                "when": "editorLangId == brikwork",
+                "command": "brikWork.setAppPath"
+            }
+        ],
+        "configuration": [
             {
                 "title": "brikWork",
                 "id": "brikWork",
@@ -74,5 +86,8 @@
     "activationEvents": [
         "onCommand:brikWork.openCurrent",
         "onCommand:brikWork.setAppPath"
-    ]
+    ],
+    "dependencies": {
+        "vsce": "^1.96.1"
+    }
 }

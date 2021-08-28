@@ -18,7 +18,7 @@ foo {
     alignment: center top
     color: blue;
     color: #ffffff
-    width: +45
+    width: 1/4in
     text: yes
     text: [] [i| ohno yes center  ] [color]
     badProp: yup;

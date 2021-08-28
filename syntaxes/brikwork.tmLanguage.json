@@ -172,9 +172,6 @@
                 },
                 {
                     "include": "#propertyKnown"
-                },
-                {
-                    "include": "#propertyBad"
                 }
             ]
         },
@@ -196,38 +193,16 @@
             },
             "patterns": [
                 {
-                    "match": "\\s*none|label|image|rect|circ|ellipse|line\\s*",
+                    "match": "\\s*none|label|imageBox|image|rect|circ|ellipse|line\\s*",
                     "name": "storage.type.brikwork"
                 }
             ]
         },
         "propertyKnown": {
-            "begin": "(?x)\\s* (width|height|name|output|data|template|dpi| name|xMargin|yMargin|border|pageSize|orientation|render| x|y|rotation|draw| text|fontFamily|fontSize|color|wordWrap|alignment|italic|bold|overline|underline|lineThrough| source|keepAspectRatio| lineColor|lineWidth|lineJoin|lineCap|fillColor| xRadius|yRadius| x2|y2)\\s*(:)\n",
+            "begin": "(?x)\\s* (width|height|name|output|data|template|dpi|csv| name|xMargin|yMargin|border|pageSize|orientation|render| x|y|rotation|draw| text|fontFamily|fontSize|color|wordWrap|alignment|italic|bold|overline|underline|lineThrough| source|keepAspectRatio| lineColor|lineWidth|lineJoin|lineCap|fillColor| xRadius|yRadius| x2|y2)\\s*(:)\n",
             "beginCaptures": {
                 "1": {
                     "name": "entity.other.attribute-name.brikwork"
-                },
-                "2": {
-                    "name": "punctuation.seperator.key-value.brikwork"
-                }
-            },
-            "end": "(;)|\\n|(?=\\})",
-            "endCaptures": {
-                "1": {
-                    "name": "punctuation.terminator.brikwork"
-                }
-            },
-            "patterns": [
-                {
-                    "include": "#value"
-                }
-            ]
-        },
-        "propertyBad": {
-            "begin": "([^:]+)\\s*(:)",
-            "beginCaptures": {
-                "1": {
-                    "name": "invalid.illegal.brikwork"
                 },
                 "2": {
                     "name": "punctuation.seperator.key-value.brikwork"
@@ -280,7 +255,7 @@
             "name": "invalid.brikwork"
         },
         "number": {
-            "match": "(?x) [\\-+\\^]?( \\d+| \\d+\\.\\d+| \\.\\d+| \\d+[./]\\d+/\\d+| [./]?\\d+/\\d+ )(px|in|mm|pt|deg|%)?\n",
+            "match": "(?x) [\\-+\\^]?( \\d+[./]\\d+/\\d+| [./]?\\d+/\\d+| \\d+| \\d+\\.\\d+| \\.\\d+ )(px|in|mm|pt|deg|%)?\n",
             "captures": {
                 "0": {
                     "name": "constant.numeric.brikwork"
@@ -474,7 +449,7 @@
             "name": "constant.language.brikwork"
         },
         "brikStd": {
-            "begin": "(?x) (\\[)\\s* (rowIndex|rowTotal|assetIndex|assetTotal|repeatIndex|repeatTotal| b|i|u|s| capitalize|lower|upper| dup|file|substr|slice| in|eq|ne )(?=[]|\\s])\n",
+            "begin": "(?x) (\\[)\\s* (rowIndex|rowTotal|assetIndex|assetTotal|repeatIndex|repeatTotal| b|i|u|s| capitalize|lower|upper| dup|file|substr|slice| rnd| in|eq|ne )(?=[]|\\s])\n",
             "beginCaptures": {
                 "1": {
                     "name": "punctuation.definition.string.begin.brikwork"
