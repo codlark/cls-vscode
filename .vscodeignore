@@ -6,3 +6,4 @@ vsc-extension-quickstart.md
 syntaxes/*.yaml
 syntaxes/convert.py
 test.bwl
+node_modules
