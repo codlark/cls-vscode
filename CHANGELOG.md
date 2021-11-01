@@ -2,6 +2,14 @@
 
 All notable changes to the brikWork extension will be documented in this file.
 
+## v 0.3, for brikWork v 0.6
+ - updated for brikWork v 0.6
+### changed
+ - syntax highlighting updates
+### removed
+ - snippets have been removed
+
+
 ## v 0.2, for brikWork v 0.5
  - updated for brikWork v 0.5
 ### changed

@@ -1,33 +1,60 @@
 layout {
-    width: 1in
-    height: 1in
+    size: 2.5in, 3.5in
 }
 
-defaults {
-    # comment
+export {
+    output: cards
+    bulk {
+        name: [role][repeat-index].png
+    }
 }
 
 briks {
-    foo = 45in
+    dark-red = #a32b1d
 }
 
-#test
+defaults {
+    font-family: Palatino Linotype
+}
 
-foo {
-    type: label;
-    alignment: center top
-    color: blue;
-    color: #ffffff
-    width: 1/4in
-    text: yes
-    text: [] [i| ohno yes center  ] [color]
-    badProp: yup;
-    text: [if|? 6 > 5 | yes | #ffffff]
-    color: [?| 4 == asdf]
-    bar {x:[=| 1 + 2 - 3 * 4 / 5 % 6];y:[/|\;wow]}
+role-container{
+    position: center, .5in
+    size: 1.5in, .25in
+
+    border {
+        type: rect
+        size: 100%, 100%
+        corner-radius: .1in
+    }
+
+    role {
+        type: text
+        size: 100%, 100%
+        font: 36pt, Palatino Linotype
+        font-color: [if| [eq| [role] | werewolf ] | [dark-red] | black ]
+        align: center, middle
+        text: [capitalize| [role] ]
+    }
+}
+
+icon {
+    type: image
+    position: center, 1in
+    source: images/[role].png
+}
+
+description {
+    type: text
+    position: center, ^.5in
+    size: 2in, .3in
+    font-family: Palatino Linotype
+    align: center, middle
+    text: [description]
 }
 
 data {
-color, name
-yellow, bird
+repeat, role, description
+2, werewolf, You may kill one player per night.
+1, seer, You may find out the role of one player per night.
+4, villager, You have no abilities.
 }

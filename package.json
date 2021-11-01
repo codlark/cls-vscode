@@ -2,7 +2,7 @@
     "name": "brikwork-vscode",
     "displayName": "brikWork",
     "description": "Language package for brikWork layout files",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "publisher": "codlark",
     "icon": "logo.png",
     "homepage": "https://codlark.itch.io/brikwork",
@@ -39,12 +39,6 @@
                 "language": "brikwork",
                 "scopeName": "source.brikWork",
                 "path": "./syntaxes/brikwork.tmLanguage.json"
-            }
-        ],
-        "snippets": [
-            {
-                "language": "brikwork",
-                "path": "./src/snippets.json"
             }
         ],
         "keybindings": [
@@ -87,7 +81,5 @@
         "onCommand:brikWork.openCurrent",
         "onCommand:brikWork.setAppPath"
     ],
-    "dependencies": {
-        "vsce": "^1.96.1"
-    }
+    "dependencies": {}
 }

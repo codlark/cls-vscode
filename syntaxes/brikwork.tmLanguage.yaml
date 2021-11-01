@@ -2,7 +2,8 @@ $schema: https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlangua
 name: brikWork
 scopeName: source.brikWork
 patterns:
-- include: '#propOnly'
+- include: '#layoutSection'
+- include: '#exportSection'
 - include: '#userBriks'
 - include: '#data'
 - include: '#comments'
@@ -13,8 +14,8 @@ repository:
     match: ^\s*#.*$
     name: comment.line.number-sign.brikwork
 
-  propOnly:
-    begin: \s*(layout|defaults|pdf)\s*(\{)
+  layoutSection:
+    begin: \s*(layout)\s*(\{)
     beginCaptures:
       '1':
         name: variable.language.brikwork
@@ -26,9 +27,75 @@ repository:
         name: punctuation.section.end.brikwork
     patterns:
     - include: '#comments'
-    - include: '#property'
+    - include: '#propertyLayout'
+    - include: '#badEscape'
+
+  propertyLayout:
+    begin: \s*(size|data|template|csv|dpi)\s*(:)
+    beginCaptures:
+      '1':
+        name: entity.other.attribute-name.brikwork
+      '2':
+        name: punctuation.sperator.key-value.brikwork
+    end: (;)|\n|(?=\})
+    endCaptures:
+      '1':
+        name: punctuation.terminator.brikwork
+    patterns:
+    - match: \b(brikWork|excel)\b
+      name: support.constant.property-value.brikwork
+    - include: '#number'
+    - include: '#escape'
+  
+  exportSection:
+    begin: \s*(export|bulk|pdf|tts)\s*(\{)
+    beginCaptures:
+      '1':
+        name: variable.language.brikwork
+      '2':
+        name: punctuation.section.begin.brikwork
+    end: (?<!\\)(\})
+    endCaptures:
+      '1':
+        name: punctuation.section.end.brikwork
+    patterns:
+    - include: '#exportSection'
+    - include: '#comments'
+    - begin: \s*(name)\s*(:)
+      beginCaptures:
+        '1':
+          name: entity.other.attribute-name.brikwork
+        '2':
+          name: punctuation.separator.key-value.brikwork
+      end: (;)|\n|(?=\})
+      endCaptures:
+        '1':
+          name: punctuation.terminator.brikwork
+      patterns:
+      - include: '#brik'
+      - include: '#escape'
+    - include: '#propertyExport'
     - include: '#badEscape'
   
+  propertyExport:
+    begin: \s*(include-bleed|output|margin|border|page-size|orientation|center-in-page|size)\s*(:)
+    beginCaptures:
+      '1':
+        name: entity.other.attribute-name.brikwork
+      '2':
+        name: punctuation.sperator.key-value.brikwork
+    end: (;)|\n|(?=\})
+    endCaptures:
+      '1':
+        name: punctuation.terminator.brikwork
+    patterns:
+    - match: \b(portrait|landscape|letter|A4)\b
+      name: support.constant.property-value.brikwork
+    - include: '#number'
+    - include: '#toggle'
+    - include: '#escape'
+
+    
   userBriks:
     begin: \s*(briks)\s*(\{)
     beginCaptures:
@@ -78,11 +145,14 @@ repository:
     - include: '#brik'
 
   section:
-    begin: \s*(\S+)\s*(\{)
+    name: contstant.string
+    begin: \s*(?:(defaults)|(\S+))\s*(\{)
     beginCaptures:
       '1':
-        name: entity.name.section.brikwork
+        name: variable.language.brikwork
       '2':
+        name: entity.name.section.brikwork
+      '3':
         name: punctuation.section.begin.brikwork
     end: (?<!\\)(\})
     endCaptures:
@@ -97,10 +167,10 @@ repository:
   property:
     patterns:
     - include: '#propertyType'
-    - include: '#propertyKnown'
+    - include: '#propertyElement'
 
   propertyType:
-    begin: \s*(type)(:)
+    begin: \s*(type)\s*(:)
     beginCaptures:
       '1':
         name: entity.other.attribute-name.brikwork
@@ -111,20 +181,20 @@ repository:
       '1':
         name: punctuation.terminator.brikwork
     patterns:
-    - match: \s*none|label|imageBox|image|rect|circ|ellipse|line\s*
+    - match: \s*none|text|image-box|image|rect|circ|ellipse|line\s*
       name: storage.type.brikwork
-
-  propertyKnown:
+  
+  
+  propertyElement:
     begin: >
-      (?x)\s*
-      (width|height|name|output|data|template|dpi|csv|
-      name|xMargin|yMargin|border|pageSize|orientation|render|
-      x|y|rotation|draw|
-      text|fontFamily|fontSize|color|wordWrap|alignment|italic|bold|overline|underline|lineThrough|
-      source|keepAspectRatio|
-      lineColor|lineWidth|lineJoin|lineCap|fillColor|
-      xRadius|yRadius|
-      x2|y2)\s*(:)
+      (?x)\s*(x|y|angle|draw|position|size|width|height|
+      text|font-family|font-size|font-color|word-wrap|italic|bold|overline|
+      underline|line-through|line-thru|
+      align|decoration|v-align|h-align|font|
+      source|keep-ratio|scale|scale-width|scale-height|
+      line-color|line-style|line-width|line-join|line-cap|fill-color|line|
+      x-corner-radius|y-corner-radius|corner-radius|diameter|
+      x2|y2|start|end)\s*(:)
     beginCaptures:
       '1':
         name: entity.other.attribute-name.brikwork
@@ -151,6 +221,7 @@ repository:
       (?x)\b
       (center|left|right|justify|
       top|middle|bottom|
+      solid|dash|dots|dash-dot|dot-dash
       miter|bevel|round|
       flat|square|round)\b
     name: support.constant.property-value.brikwork
@@ -309,7 +380,7 @@ repository:
     begin: >
       (?x)
       (\[)\s*
-      (rowIndex|rowTotal|assetIndex|assetTotal|repeatIndex|repeatTotal|
+      (row-index|row-total|card-index|card-total|repeat-index|repeat-total|
       b|i|u|s|
       capitalize|lower|upper|
       dup|file|substr|slice|
