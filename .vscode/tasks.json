@@ -7,7 +7,7 @@
             "label": "Convert yaml to json",
             "type": "shell",
             "group": "build",
-            "command": "python syntaxes/convert.py syntaxes/brikwork.tmLanguage.yaml syntaxes/brikwork.tmlanguage.json -method yaml2json"
+            "command": "python syntaxes/convert.py syntaxes/cls.tmLanguage.yaml syntaxes/cls.tmlanguage.json -method yaml2json"
         }
     ]
 }

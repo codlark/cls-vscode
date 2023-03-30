@@ -1,11 +1,11 @@
-# brikWork
+# CLS
 
-This package provides features for brikWork layout files for Visual Studio Code. For more information about brikWork see the [brikWork homepage](https://codlark.itch.io/brikwork).
+This package provides features for Card Layout Script files for Visual Studio Code. For more information about CLS see the [CLS homepage](https://codlark.itch.io/cls).
 
 ## Features
 
  - Syntax highlighting for layout files
- - A command to easily view the current layout in brikWork
+ - A command to easily view the current layout in the renderer
 
 
 ## Extension Settings
@@ -13,7 +13,7 @@ This package provides features for brikWork layout files for Visual Studio Code.
 
 This extension contributes the following settings:
 
- - `brikWork.appPath` - the path to the brikWork app
+ - `cls.appPath` - the path to the CLS Renderer
 
 ### 0.3
 

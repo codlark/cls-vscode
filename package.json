@@ -1,13 +1,13 @@
 {
-    "name": "brikwork-vscode",
-    "displayName": "brikWork",
-    "description": "Language package for brikWork layout files",
-    "version": "0.3.0",
+    "name": "CLS-vscode",
+    "displayName": "CLS",
+    "description": "Language package for Card Layout Script files",
+    "version": "1.0.0",
     "publisher": "codlark",
-    "icon": "logo.png",
-    "homepage": "https://codlark.itch.io/brikwork",
+    "icon": "logo256.png",
+    "homepage": "https://codlark.itch.io/cls",
     "engines": {
-        "vscode": "^1.58.0"
+        "vscode": "^1.76.2"
     },
     "categories": [
         "Programming Languages"
@@ -22,64 +22,61 @@
     "contributes": {
         "languages": [
             {
-                "id": "brikwork",
+                "id": "cls",
                 "aliases": [
-                    "brikWork Layout File",
-                    "brikWork",
-                    "brikwork"
+                    "CLS",
+                    "Card Layout File"
                 ],
                 "extensions": [
-                    ".bwl"
+                    ".cls"
                 ],
                 "configuration": "./language-configuration.json"
             }
         ],
         "grammars": [
             {
-                "language": "brikwork",
-                "scopeName": "source.brikWork",
-                "path": "./syntaxes/brikwork.tmLanguage.json"
+                "language": "cls",
+                "scopeName": "source.cls",
+                "path": "./syntaxes/cls.tmLanguage.json"
             }
         ],
         "keybindings": [
             {
-                "command": "brikWork.openCurrent",
+                "command": "cls.openCurrent",
                 "key": "ctrl+alt+b",
                 "mac": "cmd+alt+b",
-                "when": "editorLangId == brikwork"
+                "when": "editorLangId == cls"
             }
         ],
         "commands": [
             {
-                "title": "open brikWork with current file",
+                "title": "open CLS Renderer with current file",
                 "shortTitle": "open current file",
-                "when": "editorLangID == brikwork",
-                "command": "brikWork.openCurrent"
+                "when": "editorLangID == cls",
+                "command": "cls.openCurrent"
             },
             {
-                "title": "set path to brikWork app",
-                "shortTitle": "set brikWork app path",
-                "when": "editorLangId == brikwork",
-                "command": "brikWork.setAppPath"
+                "title": "set path to CLS Renderer",
+                "shortTitle": "set CLS Renderer path",
+                "when": "editorLangId == cls",
+                "command": "cls.setAppPath"
             }
         ],
         "configuration": [
             {
-                "title": "brikWork",
-                "id": "brikWork",
+                "title": "CLS",
+                "id": "cls",
                 "properties": {
-                    "brikWork.appPath": {
+                    "cls.appPath": {
                         "type": "string",
-                        "default": "%USERPROFILE%\\Documents\\brikWork\\brikWork app\\brikWork.exe",
-                        "description": "Path the to brikWork app. Use command \"set path to brikWork app\" for best results"
+                        "default": "%USERPROFILE%\\Documents\\CLS\\app\\CLS Renderer.exe",
+                        "description": "Path the to CLS Renderer. Use command \"set path to CLS Renderer\" for best results"
                     }
                 }
             }
         ]
     },
     "activationEvents": [
-        "onCommand:brikWork.openCurrent",
-        "onCommand:brikWork.setAppPath"
     ],
     "dependencies": {}
 }

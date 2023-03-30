@@ -2,6 +2,12 @@
 
 All notable changes to the brikWork extension will be documented in this file.
 
+## v 1.0, for CSL 1.0
+ - renamed to match the new name of the language/application
+### changed
+ - updated syntax highlighting
+
+
 ## v 0.3, for brikWork v 0.6
  - updated for brikWork v 0.6
 ### changed

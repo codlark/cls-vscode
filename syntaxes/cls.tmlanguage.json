@@ -1,7 +1,7 @@
 {
     "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "brikWork",
-    "scopeName": "source.brikWork",
+    "name": "CLS",
+    "scopeName": "source.cls",
     "patterns": [
         {
             "include": "#layoutSection"
@@ -10,7 +10,7 @@
             "include": "#exportSection"
         },
         {
-            "include": "#userBriks"
+            "include": "#userMacros"
         },
         {
             "include": "#data"
@@ -25,22 +25,22 @@
     "repository": {
         "comments": {
             "match": "^\\s*#.*$",
-            "name": "comment.line.number-sign.brikwork"
+            "name": "comment.line.number-sign.cls"
         },
         "layoutSection": {
             "begin": "\\s*(layout)\\s*(\\{)",
             "beginCaptures": {
                 "1": {
-                    "name": "variable.language.brikwork"
+                    "name": "variable.language.cls"
                 },
                 "2": {
-                    "name": "punctuation.section.begin.brikwork"
+                    "name": "punctuation.section.begin.cls"
                 }
             },
             "end": "(?<!\\\\)(\\})",
             "endCaptures": {
                 "1": {
-                    "name": "punctuation.section.end.brikwork"
+                    "name": "punctuation.section.end.cls"
                 }
             },
             "patterns": [
@@ -59,22 +59,22 @@
             "begin": "\\s*(size|data|template|csv|dpi)\\s*(:)",
             "beginCaptures": {
                 "1": {
-                    "name": "entity.other.attribute-name.brikwork"
+                    "name": "entity.other.attribute-name.cls"
                 },
                 "2": {
-                    "name": "punctuation.sperator.key-value.brikwork"
+                    "name": "punctuation.sperator.key-value.cls"
                 }
             },
             "end": "(;)|\\n|(?=\\})",
             "endCaptures": {
                 "1": {
-                    "name": "punctuation.terminator.brikwork"
+                    "name": "punctuation.terminator.cls"
                 }
             },
             "patterns": [
                 {
-                    "match": "\\b(brikWork|excel)\\b",
-                    "name": "support.constant.property-value.brikwork"
+                    "match": "\\b(CLS|excel)\\b",
+                    "name": "support.constant.property-value.cls"
                 },
                 {
                     "include": "#number"
@@ -88,16 +88,16 @@
             "begin": "\\s*(export|bulk|pdf|tts)\\s*(\\{)",
             "beginCaptures": {
                 "1": {
-                    "name": "variable.language.brikwork"
+                    "name": "variable.language.cls"
                 },
                 "2": {
-                    "name": "punctuation.section.begin.brikwork"
+                    "name": "punctuation.section.begin.cls"
                 }
             },
             "end": "(?<!\\\\)(\\})",
             "endCaptures": {
                 "1": {
-                    "name": "punctuation.section.end.brikwork"
+                    "name": "punctuation.section.end.cls"
                 }
             },
             "patterns": [
@@ -111,21 +111,21 @@
                     "begin": "\\s*(name)\\s*(:)",
                     "beginCaptures": {
                         "1": {
-                            "name": "entity.other.attribute-name.brikwork"
+                            "name": "entity.other.attribute-name.cls"
                         },
                         "2": {
-                            "name": "punctuation.separator.key-value.brikwork"
+                            "name": "punctuation.separator.key-value.cls"
                         }
                     },
                     "end": "(;)|\\n|(?=\\})",
                     "endCaptures": {
                         "1": {
-                            "name": "punctuation.terminator.brikwork"
+                            "name": "punctuation.terminator.cls"
                         }
                     },
                     "patterns": [
                         {
-                            "include": "#brik"
+                            "include": "#macro"
                         },
                         {
                             "include": "#escape"
@@ -141,25 +141,25 @@
             ]
         },
         "propertyExport": {
-            "begin": "\\s*(include-bleed|output|margin|border|page-size|orientation|center-in-page|size)\\s*(:)",
+            "begin": "\\s*(include-bleed|destination|margin|border|page-size|orientation|center-in-page|size)\\s*(:)",
             "beginCaptures": {
                 "1": {
-                    "name": "entity.other.attribute-name.brikwork"
+                    "name": "entity.other.attribute-name.cls"
                 },
                 "2": {
-                    "name": "punctuation.sperator.key-value.brikwork"
+                    "name": "punctuation.sperator.key-value.cls"
                 }
             },
             "end": "(;)|\\n|(?=\\})",
             "endCaptures": {
                 "1": {
-                    "name": "punctuation.terminator.brikwork"
+                    "name": "punctuation.terminator.cls"
                 }
             },
             "patterns": [
                 {
                     "match": "\\b(portrait|landscape|letter|A4)\\b",
-                    "name": "support.constant.property-value.brikwork"
+                    "name": "support.constant.property-value.cls"
                 },
                 {
                     "include": "#number"
@@ -172,20 +172,20 @@
                 }
             ]
         },
-        "userBriks": {
-            "begin": "\\s*(briks)\\s*(\\{)",
+        "userMacros": {
+            "begin": "\\s*(macros)\\s*(\\{)",
             "beginCaptures": {
                 "1": {
-                    "name": "variable.language.brikwork"
+                    "name": "variable.language.cls"
                 },
                 "2": {
-                    "name": "punctuation.section.begin.brikwork"
+                    "name": "punctuation.section.begin.cls"
                 }
             },
             "end": "(?<!\\\\)(\\})",
             "endCaptures": {
                 "1": {
-                    "name": "punctuation.section.end.brikwork"
+                    "name": "punctuation.section.end.cls"
                 }
             },
             "patterns": [
@@ -193,27 +193,27 @@
                     "include": "#comments"
                 },
                 {
-                    "include": "#brikDef"
+                    "include": "#macroDef"
                 },
                 {
                     "include": "#badEscape"
                 }
             ]
         },
-        "brikDef": {
+        "macroDef": {
             "begin": "\\s*([^=]+\\s*)(=)",
             "beginCaptures": {
                 "1": {
-                    "name": "variable.brik.brikwork"
+                    "name": "variable.macro.cls"
                 },
                 "2": {
-                    "name": "punctuation.definition.brikwork"
+                    "name": "punctuation.definition.cls"
                 }
             },
             "end": "(;)|\\n|(?=\\})",
             "endCaptures": {
                 "1": {
-                    "name": "punctuation.terminator.brikwork"
+                    "name": "punctuation.terminator.cls"
                 }
             },
             "patterns": [
@@ -226,16 +226,16 @@
             "begin": "\\s*(data)\\s*(\\{)",
             "beginCaptures": {
                 "1": {
-                    "name": "variable.language.brikwork"
+                    "name": "variable.language.cls"
                 },
                 "2": {
-                    "name": "punctuation.section.begin.brikwork"
+                    "name": "punctuation.section.begin.cls"
                 }
             },
             "end": "(?<!\\\\)(\\})",
             "endCaptures": {
                 "1": {
-                    "name": "punctuation.section.end.brikwork"
+                    "name": "punctuation.section.end.cls"
                 }
             },
             "patterns": [
@@ -247,10 +247,10 @@
                 },
                 {
                     "match": ",",
-                    "name": "punctuation.definition.data.brikwork"
+                    "name": "punctuation.definition.data.cls"
                 },
                 {
-                    "include": "#brik"
+                    "include": "#macro"
                 }
             ]
         },
@@ -259,19 +259,19 @@
             "begin": "\\s*(?:(defaults)|(\\S+))\\s*(\\{)",
             "beginCaptures": {
                 "1": {
-                    "name": "variable.language.brikwork"
+                    "name": "variable.language.cls"
                 },
                 "2": {
-                    "name": "entity.name.section.brikwork"
+                    "name": "entity.name.section.cls"
                 },
                 "3": {
-                    "name": "punctuation.section.begin.brikwork"
+                    "name": "punctuation.section.begin.cls"
                 }
             },
             "end": "(?<!\\\\)(\\})",
             "endCaptures": {
                 "1": {
-                    "name": "punctuation.section.end.brikwork"
+                    "name": "punctuation.section.end.cls"
                 }
             },
             "patterns": [
@@ -303,22 +303,22 @@
             "begin": "\\s*(type)\\s*(:)",
             "beginCaptures": {
                 "1": {
-                    "name": "entity.other.attribute-name.brikwork"
+                    "name": "entity.other.attribute-name.cls"
                 },
                 "2": {
-                    "name": "punctuation.seperator.key_value.brikwork"
+                    "name": "punctuation.seperator.key_value.cls"
                 }
             },
             "end": "(;)|\\n|(?=\\})",
             "endCaptures": {
                 "1": {
-                    "name": "punctuation.terminator.brikwork"
+                    "name": "punctuation.terminator.cls"
                 }
             },
             "patterns": [
                 {
                     "match": "\\s*none|text|image-box|image|rect|circ|ellipse|line\\s*",
-                    "name": "storage.type.brikwork"
+                    "name": "storage.type.cls"
                 }
             ]
         },
@@ -326,16 +326,16 @@
             "begin": "(?x)\\s*(x|y|angle|draw|position|size|width|height| text|font-family|font-size|font-color|word-wrap|italic|bold|overline| underline|line-through|line-thru| align|decoration|v-align|h-align|font| source|keep-ratio|scale|scale-width|scale-height| line-color|line-style|line-width|line-join|line-cap|fill-color|line| x-corner-radius|y-corner-radius|corner-radius|diameter| x2|y2|start|end)\\s*(:)\n",
             "beginCaptures": {
                 "1": {
-                    "name": "entity.other.attribute-name.brikwork"
+                    "name": "entity.other.attribute-name.cls"
                 },
                 "2": {
-                    "name": "punctuation.seperator.key-value.brikwork"
+                    "name": "punctuation.seperator.key-value.cls"
                 }
             },
             "end": "(;)|\\n|(?=\\})",
             "endCaptures": {
                 "1": {
-                    "name": "punctuation.terminator.brikwork"
+                    "name": "punctuation.terminator.cls"
                 }
             },
             "patterns": [
@@ -359,7 +359,7 @@
                     "include": "#color"
                 },
                 {
-                    "include": "#brik"
+                    "include": "#macro"
                 },
                 {
                     "include": "#escape"
@@ -368,82 +368,82 @@
         },
         "keywordValue": {
             "match": "(?x)\\b (center|left|right|justify| top|middle|bottom| solid|dash|dots|dash-dot|dot-dash miter|bevel|round| flat|square|round)\\b\n",
-            "name": "support.constant.property-value.brikwork"
+            "name": "support.constant.property-value.cls"
         },
         "escape": {
             "match": "\\\\\\S|\\\\\\n",
-            "name": "constant.character.escape.brikwork"
+            "name": "constant.character.escape.cls"
         },
         "badEscape": {
             "match": "\\\\\\S",
-            "name": "invalid.brikwork"
+            "name": "invalid.cls"
         },
         "number": {
-            "match": "(?x) [\\-+\\^]?( \\d+[./]\\d+/\\d+| [./]?\\d+/\\d+| \\d+| \\d+\\.\\d+| \\.\\d+ )(px|in|mm|pt|deg|%)?\n",
+            "match": "(?x) [\\-+\\^]?( \\d+[\\.\\ /]\\d+/\\d+| \\d+/\\d+| \\d+| \\d+\\.\\d+| \\.\\d+ )(px|in|mm|pt|deg|%|x)?\n",
             "captures": {
                 "0": {
-                    "name": "constant.numeric.brikwork"
+                    "name": "constant.numeric.cls"
                 },
                 "2": {
-                    "name": "keyword.other.unit.brikwork"
+                    "name": "keyword.other.unit.cls"
                 }
             }
         },
         "toggle": {
             "match": "\\b(true|yes|on|false|no|off)\\b",
-            "name": "constant.language.brikwork"
+            "name": "constant.language.cls"
         },
         "color": {
-            "name": "constant.other.color.brikwork",
+            "name": "constant.other.color.cls",
             "captures": {
                 "1": {
-                    "name": "constant.other.color.rgb-value.hex.brikwork"
+                    "name": "constant.other.color.rgb-value.hex.cls"
                 },
                 "2": {
-                    "name": "support.constant.color.svg-color-name.brikwork"
+                    "name": "support.constant.color.svg-color-name.cls"
                 }
             },
-            "match": "(?x) (\\#[a-f0-9]{6})| (aliceblue|antiquewhite|aqua|aquamarine|azure|beige|bisque|black|blanchedalmond| blue|blueviolet|brown|burlywood|cadetblue|chartreuse|chocolate|coral|cornflowerblue|cornsilk| crimson|cyan|darkblue|darkcyan|darkgoldenrod|darkgray|darkgrey|darkgreen|darkkhaki| darkmagenta|darkolivegreen|darkorange|darkorchid|darkred|darksalmon|darkseagreen| darkslateblue|darkslategray|darkslategrey|darkturquoise|darkviolet|deeppink|deepskyblue| dimgray|dimgrey|dodgerblue|firebrik|floralwhite|forestgreen|fuchsia|gainsboro|ghostwhite| gold|goldenrod|gray|grey|green|greenyellow|honeydew|hotpink|indianred|indigo|ivory|khaki| lavender|lavenderblush|lawngreen|lemonchiffon|lightblue|lightcoral|lightcyan| lightgoldenrod|lightgray|lightgrey|lightgreen|lightpink|lightsalmon|lightseagreen| lightskyblue|lightslategray|lightslategrey|lightsteelblue|lightyellow|lime|limegreen| linen|megenta|maroon|mediumaquamarine|mediumblue|mediumorchid|mediumpurple|mediumseagreen| mediumslateblue|mediumspringgreen|mediumturquoise|mediumvioletred|mednightblue|mintcream| mistyrose|moccasin|navajowhite|navy|oldlace|olive|olivedrab|orange|orangered|orchid| palegoldenrod|palegreen|paleturquoise|palevioletred|papayawhip|peachpuff|peru|pink|plum| powderblue|purple|red|rosybrown|royalblue|saddlebrown|salmon|sandybrown|seagreen|seashell| sienna|silver|skyblue|slateblue|slategray|slategrey|snow|springgreen|steelblue|tan|teal| thistle|tomato|turquoise|violet|wheat|white|whitesmoke|yellow|yellowgreen)\n"
+            "match": "(?x) (\\#[a-f0-9]{6})| (aliceblue|antiquewhite|aqua|aquamarine|azure|beige|bisque|black|blanchedalmond| blue|blueviolet|brown|burlywood|cadetblue|chartreuse|chocolate|coral|cornflowerblue|cornsilk| crimson|cyan|darkblue|darkcyan|darkgoldenrod|darkgray|darkgrey|darkgreen|darkkhaki| darkmagenta|darkolivegreen|darkorange|darkorchid|darkred|darksalmon|darkseagreen| darkslateblue|darkslategray|darkslategrey|darkturquoise|darkviolet|deeppink|deepskyblue| dimgray|dimgrey|dodgerblue|firebrick|floralwhite|forestgreen|fuchsia|gainsboro|ghostwhite| gold|goldenrod|gray|grey|green|greenyellow|honeydew|hotpink|indianred|indigo|ivory|khaki| lavender|lavenderblush|lawngreen|lemonchiffon|lightblue|lightcoral|lightcyan| lightgoldenrod|lightgray|lightgrey|lightgreen|lightpink|lightsalmon|lightseagreen| lightskyblue|lightslategray|lightslategrey|lightsteelblue|lightyellow|lime|limegreen| linen|megenta|maroon|mediumaquamarine|mediumblue|mediumorchid|mediumpurple|mediumseagreen| mediumslateblue|mediumspringgreen|mediumturquoise|mediumvioletred|mednightblue|mintcream| mistyrose|moccasin|navajowhite|navy|oldlace|olive|olivedrab|orange|orangered|orchid| palegoldenrod|palegreen|paleturquoise|palevioletred|papayawhip|peachpuff|peru|pink|plum| powderblue|purple|red|rosybrown|royalblue|saddlebrown|salmon|sandybrown|seagreen|seashell| sienna|silver|skyblue|slateblue|slategray|slategrey|snow|springgreen|steelblue|tan|teal| thistle|tomato|turquoise|transparent|violet|wheat|white|whitesmoke|yellow|yellowgreen)\n"
         },
-        "brik": {
+        "macro": {
             "patterns": [
                 {
-                    "include": "#ifBrik"
+                    "include": "#ifMacro"
                 },
                 {
-                    "include": "#testBrik"
+                    "include": "#testMacro"
                 },
                 {
-                    "include": "#mathBrik"
+                    "include": "#mathMacro"
                 },
                 {
-                    "include": "#escapeBrik"
+                    "include": "#escapeMacro"
                 },
                 {
-                    "include": "#brikBlank"
+                    "include": "#macroBlank"
                 },
                 {
-                    "include": "#brikStd"
+                    "include": "#macroStd"
                 },
                 {
-                    "include": "#brikOther"
+                    "include": "#macroOther"
                 }
             ]
         },
-        "ifBrik": {
+        "ifMacro": {
             "begin": "(\\[)\\s*(if)(?=[]|\\s])",
             "beginCaptures": {
                 "1": {
-                    "name": "punctuation.definition.string.begin.brikwork"
+                    "name": "punctuation.definition.string.begin.cls"
                 },
                 "2": {
-                    "name": "keyword.control.if.brikwork"
+                    "name": "keyword.control.if.cls"
                 }
             },
             "end": "(?<!\\\\)\\]",
             "endCaptures": {
                 "0": {
-                    "name": "punctuation.definition.string.end.brikwork"
+                    "name": "punctuation.definition.string.end.cls"
                 }
             },
             "patterns": [
@@ -455,31 +455,31 @@
                 },
                 {
                     "match": "\\|",
-                    "name": "punctuation.definition.string.continue.brikwork"
+                    "name": "punctuation.definition.string.continue.cls"
                 },
                 {
                     "include": "#value"
                 },
                 {
                     "match": "\\?",
-                    "name": "keyword.operator.brikwork"
+                    "name": "keyword.operator.cls"
                 }
             ]
         },
-        "testBrik": {
+        "testMacro": {
             "begin": "(\\[)\\s*(\\?)(?=[]|\\s])",
             "beginCaptures": {
                 "1": {
-                    "name": "punctuation.definition.string.begin.brikwork"
+                    "name": "punctuation.definition.string.begin.cls"
                 },
                 "2": {
-                    "name": "keyword.control.brikwork"
+                    "name": "keyword.control.cls"
                 }
             },
             "end": "(?<!\\\\)\\]",
             "endCaptures": {
                 "0": {
-                    "name": "punctuation.definition.string.end.brikwork"
+                    "name": "punctuation.definition.string.end.cls"
                 }
             },
             "patterns": [
@@ -491,7 +491,7 @@
                 },
                 {
                     "match": "\\|",
-                    "name": "punctuation.definition.string.continue.brikwork"
+                    "name": "punctuation.definition.string.continue.cls"
                 },
                 {
                     "include": "#value"
@@ -500,92 +500,92 @@
         },
         "testOps": {
             "match": "==|=!|>|>=|<|<=",
-            "name": "keyword.operator.brikwork"
+            "name": "keyword.operator.cls"
         },
-        "mathBrik": {
+        "mathMacro": {
             "begin": "(\\[)\\s*(\\=)(?=[]|\\s])",
             "beginCaptures": {
                 "1": {
-                    "name": "punctuation.definition.string.begin.brikwork"
+                    "name": "punctuation.definition.string.begin.cls"
                 },
                 "2": {
-                    "name": "keyword.control.brikwork"
+                    "name": "keyword.control.cls"
                 }
             },
             "end": "(?<!\\\\)\\]",
             "endCaptures": {
                 "0": {
-                    "name": "punctuation.definition.string.end.brikwork"
+                    "name": "punctuation.definition.string.end.cls"
                 }
             },
             "patterns": [
                 {
                     "match": "\\+|-|\\*|/|%",
-                    "name": "keyword.operator.brikwork"
+                    "name": "keyword.operator.cls"
                 },
                 {
                     "include": "#escape"
                 },
                 {
                     "match": "\\|",
-                    "name": "punctuation.definition.string.continue.brikwork"
+                    "name": "punctuation.definition.string.continue.cls"
                 },
                 {
                     "include": "#value"
                 }
             ]
         },
-        "escapeBrik": {
+        "escapeMacro": {
             "begin": "(\\[)\\s*(/)(?=[]|\\s])",
             "beginCaptures": {
                 "1": {
-                    "name": "punctuation.definition.string.begin.brikwork"
+                    "name": "punctuation.definition.string.begin.cls"
                 },
                 "2": {
-                    "name": "control.keyword.brikwork"
+                    "name": "control.keyword.cls"
                 }
             },
             "end": "(?<!\\\\)\\]",
             "endCaptures": {
                 "0": {
-                    "name": "punctuation.definition.string.end.brikwork"
+                    "name": "punctuation.definition.string.end.cls"
                 }
             },
             "patterns": [
                 {
                     "match": "\\\\\\S",
-                    "name": "constant.character.placeholder.brikwork"
+                    "name": "constant.character.placeholder.cls"
                 },
                 {
                     "include": "#escape"
                 },
                 {
                     "match": "\\|",
-                    "name": "punctuation.definition.string.continue.brikwork"
+                    "name": "punctuation.definition.string.continue.cls"
                 },
                 {
                     "include": "#value"
                 }
             ]
         },
-        "brikBlank": {
+        "macroBlank": {
             "match": "\\[\\s*\\]",
-            "name": "constant.language.brikwork"
+            "name": "constant.language.cls"
         },
-        "brikStd": {
-            "begin": "(?x) (\\[)\\s* (row-index|row-total|card-index|card-total|repeat-index|repeat-total| b|i|u|s| capitalize|lower|upper| dup|file|substr|slice| rnd| in|eq|ne )(?=[]|\\s])\n",
+        "macroStd": {
+            "begin": "(?x) (\\[)\\s* (row-index|row-total|card-index|card-total|repeat-index|repeat-total| b|i|u|s| capitalize|lower|upper| dup|file|for-each|slice|length| rnd| in|eq|ne )(?=[]|\\s])\n",
             "beginCaptures": {
                 "1": {
-                    "name": "punctuation.definition.string.begin.brikwork"
+                    "name": "punctuation.definition.string.begin.cls"
                 },
                 "2": {
-                    "name": "variable.function.brikwork"
+                    "name": "variable.function.cls"
                 }
             },
             "end": "(?<!\\\\)\\]",
             "endCaptures": {
                 "0": {
-                    "name": "punctuation.definition.string.end.brikwork"
+                    "name": "punctuation.definition.string.end.cls"
                 }
             },
             "patterns": [
@@ -594,27 +594,27 @@
                 },
                 {
                     "match": "\\|",
-                    "name": "punctuation.definition.string.continue.brikwork"
+                    "name": "punctuation.definition.string.continue.cls"
                 },
                 {
                     "include": "#value"
                 }
             ]
         },
-        "brikOther": {
+        "macroOther": {
             "begin": "(\\[)\\s*([^]|]*?)(?=[]|\\s])",
             "beginCaptures": {
                 "1": {
-                    "name": "punctuation.definition.string.begin.brikwork"
+                    "name": "punctuation.definition.string.begin.cls"
                 },
                 "2": {
-                    "name": "variable.other.brikwork"
+                    "name": "variable.other.cls"
                 }
             },
             "end": "(?<!\\\\)\\]",
             "endCaptures": {
                 "0": {
-                    "name": "punctuation.definition.string.end.brikwork"
+                    "name": "punctuation.definition.string.end.cls"
                 }
             },
             "patterns": [
@@ -623,7 +623,7 @@
                 },
                 {
                     "match": "\\|",
-                    "name": "punctuation.definition.string.continue.brikwork"
+                    "name": "punctuation.definition.string.continue.cls"
                 },
                 {
                     "include": "#value"
