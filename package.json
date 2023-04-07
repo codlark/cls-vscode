@@ -2,7 +2,7 @@
     "name": "CLS-vscode",
     "displayName": "CLS",
     "description": "Language package for Card Layout Script files",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "publisher": "codlark",
     "icon": "logo256.png",
     "homepage": "https://codlark.itch.io/cls",

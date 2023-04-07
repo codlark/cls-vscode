@@ -15,6 +15,14 @@ This extension contributes the following settings:
 
  - `cls.appPath` - the path to the CLS Renderer
 
+### 1.1
+
+Updated to CLS 1.1
+
+### 1.0
+
+Updated to CLS 1.0 and renamed to match
+
 ### 0.3
 
 Updated for brikWork version 0.6

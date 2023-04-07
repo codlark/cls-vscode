@@ -12,6 +12,7 @@ function openLayout(filename) {
 
 function openCurrent(textEditor, _edit) {
     doc = textEditor.document
+
     if (doc.isUntitled) {
         vscode.window.showWarningMessage("Please save layout before trying to render.")
 

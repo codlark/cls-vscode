@@ -2,7 +2,11 @@
 
 All notable changes to the brikWork extension will be documented in this file.
 
-## v 1.0, for CSL 1.0
+## v 1.1, CLS 1.1
+ - updated to match the latest version of CLS
+
+
+## v 1.0, for CLS 1.0
  - renamed to match the new name of the language/application
 ### changed
  - updated syntax highlighting

@@ -10,14 +10,14 @@ export {
 }
 
 macros {
-    dark-red = #a32b1d
+    dark-red = #a32b1d 
 }
 
 defaults {
     font-family: Palatino Linotype
 }
 
-role-container{
+role-container {
     position: center, .5in
     size: 1.5in, .25in
 
@@ -31,9 +31,9 @@ role-container{
         type: text
         size: 100%, 100%
         font: 36pt, Palatino Linotype
-        font-color: [if| [eq| [role] | werewolf ] | [dark-red] | black ]
+        font-color: [if| [eq| [role], werewolf ], [dark-red], black]
         align: center, middle
-        text: [capitalize| [role] ]
+        text: [capitalize| [role]]
     }
 }
 

@@ -218,9 +218,26 @@
             },
             "patterns": [
                 {
+                    "include": "#macroArg"
+                },
+                {
                     "include": "#value"
                 }
             ]
+        },
+        "macroArg": {
+            "match": "(\\[)\\s*(\\d\\d?|args|arg-total)\\s*(\\])",
+            "captures": {
+                "1": {
+                    "name": "punctuation.definition.string.begin.cls"
+                },
+                "2": {
+                    "name": "variable.parameter.cls"
+                },
+                "3": {
+                    "name": "punctuation.definition.string.end.cls"
+                }
+            }
         },
         "data": {
             "begin": "\\s*(data)\\s*(\\{)",
@@ -247,7 +264,7 @@
                 },
                 {
                     "match": ",",
-                    "name": "punctuation.definition.data.cls"
+                    "name": "punctuation.seperator.value.cls"
                 },
                 {
                     "include": "#macro"
@@ -255,7 +272,6 @@
             ]
         },
         "section": {
-            "name": "contstant.string",
             "begin": "\\s*(?:(defaults)|(\\S+))\\s*(\\{)",
             "beginCaptures": {
                 "1": {
@@ -359,6 +375,9 @@
                     "include": "#color"
                 },
                 {
+                    "include": "#list"
+                },
+                {
                     "include": "#macro"
                 },
                 {
@@ -405,8 +424,37 @@
             },
             "match": "(?x) (\\#[a-f0-9]{6})| (aliceblue|antiquewhite|aqua|aquamarine|azure|beige|bisque|black|blanchedalmond| blue|blueviolet|brown|burlywood|cadetblue|chartreuse|chocolate|coral|cornflowerblue|cornsilk| crimson|cyan|darkblue|darkcyan|darkgoldenrod|darkgray|darkgrey|darkgreen|darkkhaki| darkmagenta|darkolivegreen|darkorange|darkorchid|darkred|darksalmon|darkseagreen| darkslateblue|darkslategray|darkslategrey|darkturquoise|darkviolet|deeppink|deepskyblue| dimgray|dimgrey|dodgerblue|firebrick|floralwhite|forestgreen|fuchsia|gainsboro|ghostwhite| gold|goldenrod|gray|grey|green|greenyellow|honeydew|hotpink|indianred|indigo|ivory|khaki| lavender|lavenderblush|lawngreen|lemonchiffon|lightblue|lightcoral|lightcyan| lightgoldenrod|lightgray|lightgrey|lightgreen|lightpink|lightsalmon|lightseagreen| lightskyblue|lightslategray|lightslategrey|lightsteelblue|lightyellow|lime|limegreen| linen|megenta|maroon|mediumaquamarine|mediumblue|mediumorchid|mediumpurple|mediumseagreen| mediumslateblue|mediumspringgreen|mediumturquoise|mediumvioletred|mednightblue|mintcream| mistyrose|moccasin|navajowhite|navy|oldlace|olive|olivedrab|orange|orangered|orchid| palegoldenrod|palegreen|paleturquoise|palevioletred|papayawhip|peachpuff|peru|pink|plum| powderblue|purple|red|rosybrown|royalblue|saddlebrown|salmon|sandybrown|seagreen|seashell| sienna|silver|skyblue|slateblue|slategray|slategrey|snow|springgreen|steelblue|tan|teal| thistle|tomato|turquoise|transparent|violet|wheat|white|whitesmoke|yellow|yellowgreen)\n"
         },
+        "list": {
+            "begin": "\\(",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.list.begin.cls"
+                }
+            },
+            "end": "\\)",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.list.end.cls"
+                }
+            },
+            "patterns": [
+                {
+                    "match": ",",
+                    "name": "punctuation.separator.value.cls"
+                },
+                {
+                    "include": "#value"
+                }
+            ]
+        },
         "macro": {
             "patterns": [
+                {
+                    "include": "#switchMacro"
+                },
+                {
+                    "include": "#loopMacros"
+                },
                 {
                     "include": "#ifMacro"
                 },
@@ -430,14 +478,47 @@
                 }
             ]
         },
-        "ifMacro": {
-            "begin": "(\\[)\\s*(if)(?=[]|\\s])",
+        "switchMacro": {
+            "begin": "(\\[)\\s*(switch)(?=[]|,\\s])",
             "beginCaptures": {
                 "1": {
                     "name": "punctuation.definition.string.begin.cls"
                 },
                 "2": {
-                    "name": "keyword.control.if.cls"
+                    "name": "keyword.control.flow.cls"
+                }
+            },
+            "end": "(?<!\\\\)\\]",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.end.cls"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#escape"
+                },
+                {
+                    "match": "[|,]",
+                    "name": "punctuation.definition.string.continue.cls"
+                },
+                {
+                    "match": "default",
+                    "name": "keyword.control.flow.cls"
+                },
+                {
+                    "include": "#value"
+                }
+            ]
+        },
+        "ifMacro": {
+            "begin": "(\\[)\\s*(if)(?=[]|,\\s])",
+            "beginCaptures": {
+                "1": {
+                    "name": "punctuation.definition.string.begin.cls"
+                },
+                "2": {
+                    "name": "keyword.control.flow.cls"
                 }
             },
             "end": "(?<!\\\\)\\]",
@@ -454,7 +535,7 @@
                     "include": "#escape"
                 },
                 {
-                    "match": "\\|",
+                    "match": "[|,]",
                     "name": "punctuation.definition.string.continue.cls"
                 },
                 {
@@ -467,7 +548,7 @@
             ]
         },
         "testMacro": {
-            "begin": "(\\[)\\s*(\\?)(?=[]|\\s])",
+            "begin": "(\\[)\\s*(\\?)(?=[]|,\\s])",
             "beginCaptures": {
                 "1": {
                     "name": "punctuation.definition.string.begin.cls"
@@ -502,8 +583,57 @@
             "match": "==|=!|>|>=|<|<=",
             "name": "keyword.operator.cls"
         },
+        "loopMacros": {
+            "begin": "(\\[)\\s*(for-each|dup)(?=[]|,\\s])",
+            "beginCaptures": {
+                "1": {
+                    "name": "punctuation.definition.string.begin.cls"
+                },
+                "2": {
+                    "name": "keyword.control.flow.cls"
+                }
+            },
+            "end": "(?<!\\\\)\\]",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.end.cls"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#testOps"
+                },
+                {
+                    "include": "#escape"
+                },
+                {
+                    "include": "#loopCounters"
+                },
+                {
+                    "match": "[|,]",
+                    "name": "punctuation.definition.string.continue.cls"
+                },
+                {
+                    "include": "#value"
+                }
+            ]
+        },
+        "loopCounters": {
+            "match": "(\\[)\\s*(item|d)\\s*(\\])",
+            "captures": {
+                "1": {
+                    "name": "punctuation.definition.string.begin.cls"
+                },
+                "2": {
+                    "name": "entity.name.function.cls"
+                },
+                "3": {
+                    "name": "punctuation.definition.string.end.cls"
+                }
+            }
+        },
         "mathMacro": {
-            "begin": "(\\[)\\s*(\\=)(?=[]|\\s])",
+            "begin": "(\\[)\\s*(\\=)(?=[]|,\\s])",
             "beginCaptures": {
                 "1": {
                     "name": "punctuation.definition.string.begin.cls"
@@ -536,7 +666,7 @@
             ]
         },
         "escapeMacro": {
-            "begin": "(\\[)\\s*(/)(?=[]|\\s])",
+            "begin": "(\\[)\\s*(/)(?=[]|,\\s])",
             "beginCaptures": {
                 "1": {
                     "name": "punctuation.definition.string.begin.cls"
@@ -573,13 +703,13 @@
             "name": "constant.language.cls"
         },
         "macroStd": {
-            "begin": "(?x) (\\[)\\s* (row-index|row-total|card-index|card-total|repeat-index|repeat-total| b|i|u|s| capitalize|lower|upper| dup|file|for-each|slice|length| rnd| in|eq|ne )(?=[]|\\s])\n",
+            "begin": "(?x) (\\[)\\s* (row-index|row-total|card-index|card-total|repeat-index|repeat-total| b|i|u|s| capitalize|lower|upper| file|slice|length|rnd|substr in|eq|ne )(?=[]|,\\s])\n",
             "beginCaptures": {
                 "1": {
                     "name": "punctuation.definition.string.begin.cls"
                 },
                 "2": {
-                    "name": "variable.function.cls"
+                    "name": "entity.name.function.cls"
                 }
             },
             "end": "(?<!\\\\)\\]",
@@ -593,7 +723,7 @@
                     "include": "#escape"
                 },
                 {
-                    "match": "\\|",
+                    "match": "[|,]",
                     "name": "punctuation.definition.string.continue.cls"
                 },
                 {
@@ -602,7 +732,7 @@
             ]
         },
         "macroOther": {
-            "begin": "(\\[)\\s*([^]|]*?)(?=[]|\\s])",
+            "begin": "(\\[)\\s*([^]|,]*?)(?=[]|,\\s])",
             "beginCaptures": {
                 "1": {
                     "name": "punctuation.definition.string.begin.cls"
@@ -622,7 +752,7 @@
                     "include": "#escape"
                 },
                 {
-                    "match": "\\|",
+                    "match": "[|,]",
                     "name": "punctuation.definition.string.continue.cls"
                 },
                 {

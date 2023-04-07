@@ -95,7 +95,6 @@ repository:
     - include: '#toggle'
     - include: '#escape'
 
-    
   userMacros:
     begin: \s*(macros)\s*(\{)
     beginCaptures:
@@ -124,7 +123,18 @@ repository:
       '1':
         name: punctuation.terminator.cls
     patterns:
+    - include: '#macroArg'
     - include: '#value'
+  
+  macroArg:
+    match: (\[)\s*(\d\d?|args|arg-total)\s*(\])
+    captures:
+      '1':
+        name: punctuation.definition.string.begin.cls
+      '2':
+        name: variable.parameter.cls
+      '3':
+        name: punctuation.definition.string.end.cls
   
   data:
     begin: \s*(data)\s*(\{)
@@ -141,11 +151,10 @@ repository:
     - include: '#comments'
     - include: '#escape'
     - match: ','
-      name: punctuation.definition.data.cls
+      name: punctuation.seperator.value.cls
     - include: '#macro'
 
   section:
-    name: contstant.string
     begin: \s*(?:(defaults)|(\S+))\s*(\{)
     beginCaptures:
       '1':
@@ -184,7 +193,6 @@ repository:
     - match: \s*none|text|image-box|image|rect|circ|ellipse|line\s*
       name: storage.type.cls
   
-  
   propertyElement:
     begin: >
       (?x)\s*(x|y|angle|draw|position|size|width|height|
@@ -213,6 +221,7 @@ repository:
     - include: '#number'
     - include: '#toggle'
     - include: '#color'
+    - include: '#list'
     - include: '#macro'
     - include: '#escape'
   
@@ -282,8 +291,24 @@ repository:
       sienna|silver|skyblue|slateblue|slategray|slategrey|snow|springgreen|steelblue|tan|teal|
       thistle|tomato|turquoise|transparent|violet|wheat|white|whitesmoke|yellow|yellowgreen)
 
+  list:
+    begin: \(
+    beginCaptures:
+      '0':
+        name: punctuation.definition.list.begin.cls
+    end: \)
+    endCaptures:
+      '0':
+        name: punctuation.definition.list.end.cls
+    patterns:
+    - match: ','
+      name: punctuation.separator.value.cls
+    - include: '#value'
+
   macro:
     patterns:
+    - include: '#switchMacro'
+    - include: '#loopMacros'
     - include: '#ifMacro'
     - include: '#testMacro'
     - include: '#mathMacro'
@@ -292,13 +317,33 @@ repository:
     - include: '#macroStd'
     - include: '#macroOther'
 
-  ifMacro:
-    begin: (\[)\s*(if)(?=[]|\s])
+  switchMacro:
+    begin: (\[)\s*(switch)(?=[]|,\s])
     beginCaptures:
       '1':
         name: punctuation.definition.string.begin.cls
       '2':
-        name: keyword.control.if.cls
+        name: keyword.control.flow.cls
+    end: (?<!\\)\]
+    endCaptures:
+      '0':
+        name: punctuation.definition.string.end.cls
+    patterns:
+    - include: '#escape'
+    - match: '[|,]'
+      name: punctuation.definition.string.continue.cls
+    - match: 'default'
+      name: keyword.control.flow.cls
+    - include: '#value'
+
+  
+  ifMacro:
+    begin: (\[)\s*(if)(?=[]|,\s])
+    beginCaptures:
+      '1':
+        name: punctuation.definition.string.begin.cls
+      '2':
+        name: keyword.control.flow.cls
     end: (?<!\\)\]
     endCaptures:
       '0':
@@ -306,14 +351,14 @@ repository:
     patterns:
     - include: '#testOps'
     - include: '#escape'
-    - match: \|
+    - match: '[|,]'
       name: punctuation.definition.string.continue.cls
     - include: '#value'
     - match: '\?'
       name: keyword.operator.cls
 
   testMacro:
-    begin: (\[)\s*(\?)(?=[]|\s])
+    begin: (\[)\s*(\?)(?=[]|,\s])
     beginCaptures:
       '1':
         name: punctuation.definition.string.begin.cls
@@ -334,8 +379,38 @@ repository:
     match: ==|=!|>|>=|<|<=
     name: keyword.operator.cls
 
+  loopMacros:
+    begin: (\[)\s*(for-each|dup)(?=[]|,\s])
+    beginCaptures:
+      '1':
+        name: punctuation.definition.string.begin.cls
+      '2':
+        name: keyword.control.flow.cls
+    end: (?<!\\)\]
+    endCaptures:
+      '0':
+        name: punctuation.definition.string.end.cls
+    patterns:
+    - include: '#testOps'
+    - include: '#escape'
+    - include: '#loopCounters'
+    - match: '[|,]'
+      name: punctuation.definition.string.continue.cls
+    - include: '#value'
+
+  loopCounters:
+    match: (\[)\s*(item|d)\s*(\])
+    captures:
+      '1':
+        name: punctuation.definition.string.begin.cls
+      '2':
+        name: entity.name.function.cls
+      '3':
+        name: punctuation.definition.string.end.cls
+
+
   mathMacro:
-    begin: (\[)\s*(\=)(?=[]|\s])
+    begin: (\[)\s*(\=)(?=[]|,\s])
     beginCaptures:
       '1':
         name: punctuation.definition.string.begin.cls
@@ -354,7 +429,7 @@ repository:
     - include: '#value'
 
   escapeMacro:
-    begin: (\[)\s*(/)(?=[]|\s])
+    begin: (\[)\s*(/)(?=[]|,\s])
     beginCaptures:
       '1':
         name: punctuation.definition.string.begin.cls
@@ -383,28 +458,26 @@ repository:
       (row-index|row-total|card-index|card-total|repeat-index|repeat-total|
       b|i|u|s|
       capitalize|lower|upper|
-      dup|file|for-each|slice|length|
-      rnd|
+      file|slice|length|rnd|substr
       in|eq|ne
-      )(?=[]|\s])
+      )(?=[]|,\s])
     beginCaptures:
       '1':
         name: punctuation.definition.string.begin.cls
       '2':
-        name: variable.function.cls
+        name: entity.name.function.cls
     end: (?<!\\)\]
     endCaptures:
       '0':
         name: punctuation.definition.string.end.cls
     patterns:
     - include: '#escape'
-    - match: \|
+    - match: '[|,]'
       name: punctuation.definition.string.continue.cls
     - include: '#value'
 
-
   macroOther:
-    begin: (\[)\s*([^]|]*?)(?=[]|\s])
+    begin: (\[)\s*([^]|,]*?)(?=[]|,\s])
     beginCaptures:
       '1':
         name: punctuation.definition.string.begin.cls
@@ -416,6 +489,6 @@ repository:
         name: punctuation.definition.string.end.cls
     patterns:
     - include: '#escape'
-    - match: \|
+    - match: '[|,]'
       name: punctuation.definition.string.continue.cls
     - include: '#value'
