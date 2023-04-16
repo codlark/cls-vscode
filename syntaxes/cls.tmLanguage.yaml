@@ -31,7 +31,7 @@ repository:
     - include: '#badEscape'
 
   propertyLayout:
-    begin: \s*(size|data|template|csv|dpi)\s*(:)
+    begin: \s*(size|data|bleed|template|csv|dpi)\s*(:)
     beginCaptures:
       '1':
         name: entity.other.attribute-name.cls
@@ -197,7 +197,7 @@ repository:
     begin: >
       (?x)\s*(x|y|angle|draw|position|size|width|height|
       text|font-family|font-size|font-color|word-wrap|italic|bold|overline|
-      underline|line-through|line-thru|
+      underline|line-through|line-thru|shrink-font|
       align|decoration|v-align|h-align|font|
       source|keep-ratio|scale|scale-width|scale-height|
       line-color|line-style|line-width|line-join|line-cap|fill-color|line|
@@ -273,7 +273,7 @@ repository:
     match: >
       (?x)
       (\#[a-f0-9]{6})|
-      (aliceblue|antiquewhite|aqua|aquamarine|azure|beige|bisque|black|blanchedalmond|
+      \b(aliceblue|antiquewhite|aqua|aquamarine|azure|beige|bisque|black|blanchedalmond|
       blue|blueviolet|brown|burlywood|cadetblue|chartreuse|chocolate|coral|cornflowerblue|cornsilk|
       crimson|cyan|darkblue|darkcyan|darkgoldenrod|darkgray|darkgrey|darkgreen|darkkhaki|
       darkmagenta|darkolivegreen|darkorange|darkorchid|darkred|darksalmon|darkseagreen|
@@ -289,7 +289,7 @@ repository:
       palegoldenrod|palegreen|paleturquoise|palevioletred|papayawhip|peachpuff|peru|pink|plum|
       powderblue|purple|red|rosybrown|royalblue|saddlebrown|salmon|sandybrown|seagreen|seashell|
       sienna|silver|skyblue|slateblue|slategray|slategrey|snow|springgreen|steelblue|tan|teal|
-      thistle|tomato|turquoise|transparent|violet|wheat|white|whitesmoke|yellow|yellowgreen)
+      thistle|tomato|turquoise|transparent|violet|wheat|white|whitesmoke|yellow|yellowgreen)\b
 
   list:
     begin: \(

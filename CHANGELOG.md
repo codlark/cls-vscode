@@ -2,6 +2,9 @@
 
 All notable changes to the brikWork extension will be documented in this file.
 
+## v1.2, CLS 1.2
+ - updated to match the latest version of CLS
+
 ## v 1.1, CLS 1.1
  - updated to match the latest version of CLS
 
