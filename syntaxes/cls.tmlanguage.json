@@ -56,7 +56,7 @@
             ]
         },
         "propertyLayout": {
-            "begin": "\\s*(size|data|template|csv|dpi)\\s*(:)",
+            "begin": "\\s*(size|data|bleed|template|csv|dpi)\\s*(:)",
             "beginCaptures": {
                 "1": {
                     "name": "entity.other.attribute-name.cls"
@@ -218,26 +218,9 @@
             },
             "patterns": [
                 {
-                    "include": "#macroArg"
-                },
-                {
                     "include": "#value"
                 }
             ]
-        },
-        "macroArg": {
-            "match": "(\\[)\\s*(\\d\\d?|args|arg-total)\\s*(\\])",
-            "captures": {
-                "1": {
-                    "name": "punctuation.definition.string.begin.cls"
-                },
-                "2": {
-                    "name": "variable.parameter.cls"
-                },
-                "3": {
-                    "name": "punctuation.definition.string.end.cls"
-                }
-            }
         },
         "data": {
             "begin": "\\s*(data)\\s*(\\{)",
@@ -333,13 +316,13 @@
             },
             "patterns": [
                 {
-                    "match": "\\s*none|text|image-box|image|rect|circ|ellipse|line\\s*",
+                    "match": "\\s*none|text|image|svg|rect|circle|ellipse|line\\s*",
                     "name": "storage.type.cls"
                 }
             ]
         },
         "propertyElement": {
-            "begin": "(?x)\\s*(x|y|angle|draw|position|size|width|height| text|font-family|font-size|font-color|word-wrap|italic|bold|overline| underline|line-through|line-thru| align|decoration|v-align|h-align|font| source|keep-ratio|scale|scale-width|scale-height| line-color|line-style|line-width|line-join|line-cap|fill-color|line| x-corner-radius|y-corner-radius|corner-radius|diameter| x2|y2|start|end)\\s*(:)\n",
+            "begin": "(?x)\\s*(x|y|angle|draw|position|size|width|height| text|font-family|font-size|font-color|word-wrap|italic|bold|overline| underline|line-through|line-thru|shrink-font| align|decoration|v-align|h-align|font| source|keep-ratio|scale|scale-width|scale-height|id| line-color|line-style|line-width|line-join|line-cap|fill-color|line| x-corner-radius|y-corner-radius|corner-radius|diameter| x2|y2|start|end)\\s*(:)\n",
             "beginCaptures": {
                 "1": {
                     "name": "entity.other.attribute-name.cls"
@@ -398,7 +381,7 @@
             "name": "invalid.cls"
         },
         "number": {
-            "match": "(?x) [\\-+\\^]?( \\d+[\\.\\ /]\\d+/\\d+| \\d+/\\d+| \\d+| \\d+\\.\\d+| \\.\\d+ )(px|in|mm|pt|deg|%|x)?\n",
+            "match": "(?x) [\\-+\\^]?( \\d+[\\.\\ /]\\d+/\\d+| \\d+/\\d+| \\d+| \\d+\\.\\d+| \\.\\d+ )(px|in|mm|pt|deg|%|x|dpi)?\n",
             "captures": {
                 "0": {
                     "name": "constant.numeric.cls"
@@ -422,7 +405,7 @@
                     "name": "support.constant.color.svg-color-name.cls"
                 }
             },
-            "match": "(?x) (\\#[a-f0-9]{6})| (aliceblue|antiquewhite|aqua|aquamarine|azure|beige|bisque|black|blanchedalmond| blue|blueviolet|brown|burlywood|cadetblue|chartreuse|chocolate|coral|cornflowerblue|cornsilk| crimson|cyan|darkblue|darkcyan|darkgoldenrod|darkgray|darkgrey|darkgreen|darkkhaki| darkmagenta|darkolivegreen|darkorange|darkorchid|darkred|darksalmon|darkseagreen| darkslateblue|darkslategray|darkslategrey|darkturquoise|darkviolet|deeppink|deepskyblue| dimgray|dimgrey|dodgerblue|firebrick|floralwhite|forestgreen|fuchsia|gainsboro|ghostwhite| gold|goldenrod|gray|grey|green|greenyellow|honeydew|hotpink|indianred|indigo|ivory|khaki| lavender|lavenderblush|lawngreen|lemonchiffon|lightblue|lightcoral|lightcyan| lightgoldenrod|lightgray|lightgrey|lightgreen|lightpink|lightsalmon|lightseagreen| lightskyblue|lightslategray|lightslategrey|lightsteelblue|lightyellow|lime|limegreen| linen|megenta|maroon|mediumaquamarine|mediumblue|mediumorchid|mediumpurple|mediumseagreen| mediumslateblue|mediumspringgreen|mediumturquoise|mediumvioletred|mednightblue|mintcream| mistyrose|moccasin|navajowhite|navy|oldlace|olive|olivedrab|orange|orangered|orchid| palegoldenrod|palegreen|paleturquoise|palevioletred|papayawhip|peachpuff|peru|pink|plum| powderblue|purple|red|rosybrown|royalblue|saddlebrown|salmon|sandybrown|seagreen|seashell| sienna|silver|skyblue|slateblue|slategray|slategrey|snow|springgreen|steelblue|tan|teal| thistle|tomato|turquoise|transparent|violet|wheat|white|whitesmoke|yellow|yellowgreen)\n"
+            "match": "(?x) (\\#[a-f0-9]{6})| \\b(aliceblue|antiquewhite|aqua|aquamarine|azure|beige|bisque|black|blanchedalmond| blue|blueviolet|brown|burlywood|cadetblue|chartreuse|chocolate|coral|cornflowerblue|cornsilk| crimson|cyan|darkblue|darkcyan|darkgoldenrod|darkgray|darkgrey|darkgreen|darkkhaki| darkmagenta|darkolivegreen|darkorange|darkorchid|darkred|darksalmon|darkseagreen| darkslateblue|darkslategray|darkslategrey|darkturquoise|darkviolet|deeppink|deepskyblue| dimgray|dimgrey|dodgerblue|firebrick|floralwhite|forestgreen|fuchsia|gainsboro|ghostwhite| gold|goldenrod|gray|grey|green|greenyellow|honeydew|hotpink|indianred|indigo|ivory|khaki| lavender|lavenderblush|lawngreen|lemonchiffon|lightblue|lightcoral|lightcyan| lightgoldenrod|lightgray|lightgrey|lightgreen|lightpink|lightsalmon|lightseagreen| lightskyblue|lightslategray|lightslategrey|lightsteelblue|lightyellow|lime|limegreen| linen|megenta|maroon|mediumaquamarine|mediumblue|mediumorchid|mediumpurple|mediumseagreen| mediumslateblue|mediumspringgreen|mediumturquoise|mediumvioletred|mednightblue|mintcream| mistyrose|moccasin|navajowhite|navy|oldlace|olive|olivedrab|orange|orangered|orchid| palegoldenrod|palegreen|paleturquoise|palevioletred|papayawhip|peachpuff|peru|pink|plum| powderblue|purple|red|rosybrown|royalblue|saddlebrown|salmon|sandybrown|seagreen|seashell| sienna|silver|skyblue|slateblue|slategray|slategrey|snow|springgreen|steelblue|tan|teal| thistle|tomato|turquoise|transparent|violet|wheat|white|whitesmoke|yellow|yellowgreen)\\b\n"
         },
         "list": {
             "begin": "\\(",
@@ -703,7 +686,7 @@
             "name": "constant.language.cls"
         },
         "macroStd": {
-            "begin": "(?x) (\\[)\\s* (row-index|row-total|card-index|card-total|repeat-index|repeat-total| b|i|u|s| capitalize|lower|upper| file|slice|length|rnd|substr in|eq|ne )(?=[]|,\\s])\n",
+            "begin": "(?x) (\\[)\\s* (row-index|row-total|card-index|card-total|repeat-index|repeat-total| b|i|u|s| capitalize|lower|upper| file|slice|length|rnd|substr| in|eq|ne|not|either| \\d\\d?|args|arg-total )(?=[]|,\\s])\n",
             "beginCaptures": {
                 "1": {
                     "name": "punctuation.definition.string.begin.cls"

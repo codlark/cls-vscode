@@ -123,18 +123,8 @@ repository:
       '1':
         name: punctuation.terminator.cls
     patterns:
-    - include: '#macroArg'
     - include: '#value'
-  
-  macroArg:
-    match: (\[)\s*(\d\d?|args|arg-total)\s*(\])
-    captures:
-      '1':
-        name: punctuation.definition.string.begin.cls
-      '2':
-        name: variable.parameter.cls
-      '3':
-        name: punctuation.definition.string.end.cls
+
   
   data:
     begin: \s*(data)\s*(\{)
@@ -190,7 +180,7 @@ repository:
       '1':
         name: punctuation.terminator.cls
     patterns:
-    - match: \s*none|text|image-box|image|rect|circ|ellipse|line\s*
+    - match: \s*none|text|image|svg|rect|circle|ellipse|line\s*
       name: storage.type.cls
   
   propertyElement:
@@ -199,7 +189,7 @@ repository:
       text|font-family|font-size|font-color|word-wrap|italic|bold|overline|
       underline|line-through|line-thru|shrink-font|
       align|decoration|v-align|h-align|font|
-      source|keep-ratio|scale|scale-width|scale-height|
+      source|keep-ratio|scale|scale-width|scale-height|id|
       line-color|line-style|line-width|line-join|line-cap|fill-color|line|
       x-corner-radius|y-corner-radius|corner-radius|diameter|
       x2|y2|start|end)\s*(:)
@@ -252,7 +242,7 @@ repository:
       \d+|
       \d+\.\d+|
       \.\d+
-      )(px|in|mm|pt|deg|%|x)?
+      )(px|in|mm|pt|deg|%|x|dpi)?
     captures:
       '0':
         name: constant.numeric.cls
@@ -458,8 +448,9 @@ repository:
       (row-index|row-total|card-index|card-total|repeat-index|repeat-total|
       b|i|u|s|
       capitalize|lower|upper|
-      file|slice|length|rnd|substr
-      in|eq|ne
+      file|slice|length|rnd|substr|
+      in|eq|ne|not|either|
+      \d\d?|args|arg-total
       )(?=[]|,\s])
     beginCaptures:
       '1':
