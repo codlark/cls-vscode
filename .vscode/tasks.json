@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Convert yaml to json",
+            "label": "convert-yaml-to-json",
             "type": "shell",
             "group": "build",
             "command": "python syntaxes/convert.py syntaxes/cls.tmLanguage.yaml syntaxes/cls.tmlanguage.json -method yaml2json"

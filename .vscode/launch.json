@@ -6,13 +6,14 @@
 	"version": "0.2.0",
     "configurations": [
         {
-            "preLaunchTask": "Convert yaml to json",
-            "name": "Extension",
-            "type": "extensionHost",
-            "request": "launch",
             "args": [
                 "--extensionDevelopmentPath=${workspaceFolder}"
-            ]
+            ],
+            "name": "Launch Extension",
+
+            "preLaunchTask": "convert-yaml-to-json",
+            "request": "launch",
+            "type": "extensionHost"
         }
     ]
 }
